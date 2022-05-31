@@ -1,7 +1,8 @@
 import React from "react";
+import Map from "./components/Map";
 
 const App = () => {
-  return <h1>Final project front</h1>;
+  return <Map />;
 };
 
 export default App;
