@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "Test 1",
+      "city": "Copenhagen",
+      "description": "This place is fabulous",
+      "categories": ["Casual", "Date night"],
+      "position": { "lat": 55.7, "lng": 12.55 }
+    },
+    {
+      "id": 2,
+      "name": "Test 2",
+      "city": "Copenhagen",
+      "description": "This place is fabulous",
+      "categories": ["Casual"],
+      "position": { "lat": 55.67, "lng": 12.54 }
+    },
+    {
+      "id": 3,
+      "name": "Test 3",
+      "city": "Copenhagen",
+      "description": "This place is fabulous",
+      "categories": ["Date night"],
+
+      "position": { "lat": 55.67, "lng": 12.56 }
+    },
+    {
+      "id": 4,
+      "name": "Test 4",
+      "city": "Copenhagen",
+      "description": "This place is fabulous",
+      "categories": ["Casual", "Date night", "Street food"],
+      "position": { "lat": 55.7, "lng": 12.59 }
+    }
+  ]
+}
