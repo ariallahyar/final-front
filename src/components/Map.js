@@ -1,21 +1,23 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useLoadScript, GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import mockData from "../mock-data.json";
 
-const places = [
-  { id: 1, name: "Test 1", position: { lat: 55.7, lng: 12.55 } },
-  { id: 2, name: "Test 2", position: { lat: 55.67, lng: 12.54 } },
-  { id: 3, name: "Test 3", position: { lat: 55.67, lng: 12.56 } },
-  { id: 4, name: "Test 4", position: { lat: 55.7, lng: 12.59 } },
-];
+const places = mockData.results;
 
 const mapContainerStyle = { width: "100%", height: "100vh" };
 
 const Map = () => {
   const [activeMarker, setActiveMarker] = useState(null);
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
-  const center = useMemo(() => ({ lat: 55.67, lng: 12.56 }), []);
+
+  const handleOnLoad = (map) => {
+    const bounds = new window.google.maps.LatLngBounds();
+    places.forEach(({ position }) => bounds.extend(position));
+    map.fitBounds(bounds);
+  };
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -28,16 +30,18 @@ const Map = () => {
 
   return (
     <GoogleMap
-      zoom={13}
-      center={center}
+      onLoad={handleOnLoad}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {places.map(({ id, name, position }) => (
+      {places.map(({ id, name, position, description }) => (
         <Marker key={id} position={position} onClick={() => handleActiveMarker(id)}>
           {activeMarker === id && (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
+              <div>
+                <h2>{name}</h2>
+                <p>{description}</p>
+              </div>
             </InfoWindow>
           )}
         </Marker>
