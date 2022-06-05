@@ -15,7 +15,7 @@ const Map = () => {
 
   const handleOnLoad = (map) => {
     const bounds = new window.google.maps.LatLngBounds();
-    places.forEach(({ position }) => bounds.extend(position));
+    places.forEach(({ coordinates }) => bounds.extend(coordinates));
     map.fitBounds(bounds);
   };
 
@@ -34,12 +34,13 @@ const Map = () => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {places.map(({ id, name, position, description }) => (
-        <Marker key={id} position={position} onClick={() => handleActiveMarker(id)}>
-          {activeMarker === id && (
+      {places.map(({ place_id, name, coordinates, description, formatted_address }) => (
+        <Marker key={place_id} position={coordinates} onClick={() => handleActiveMarker(place_id)}>
+          {activeMarker === place_id && (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
               <div>
                 <h2>{name}</h2>
+                <h3>{formatted_address}</h3>
                 <p>{description}</p>
               </div>
             </InfoWindow>
