@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router";
 import Map from "./components/Map";
-import mockData from "./mock-data.json";
+import NotFound from "./components/NotFound";
 
+import mockData from "./mock-data.json";
 const markers = mockData.results; // for development
 
 const App = () => {
@@ -14,7 +17,13 @@ const App = () => {
   //     .catch((err) => console.log(err));
   // }, []);
 
-  return <Map markers={markers} />;
+  return (
+    <Routes>
+      <Route path="/" element={<Map markers={markers} />} />
+      <Route path="/404" element={<NotFound />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+    </Routes>
+  );
 };
 
 export default App;
