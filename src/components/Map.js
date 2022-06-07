@@ -6,7 +6,7 @@ const places = mockData.results;
 
 const mapContainerStyle = { width: "100%", height: "100vh" };
 
-const Map = () => {
+const Map = ({ markers }) => {
   const [activeMarker, setActiveMarker] = useState(null);
 
   const { isLoaded } = useLoadScript({
@@ -34,7 +34,7 @@ const Map = () => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {places.map(({ place_id, name, coordinates, description, formatted_address }) => (
+      {markers.map(({ place_id, name, coordinates, description, formatted_address }) => (
         <Marker key={place_id} position={coordinates} onClick={() => handleActiveMarker(place_id)}>
           {activeMarker === place_id && (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
