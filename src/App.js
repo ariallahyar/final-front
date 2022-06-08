@@ -2,12 +2,13 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router";
 import Layout from "./components/Layout";
-import Map from "./components/Map";
+import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import CommunityPage from "./components/CommunityPage";
 import SupperSocietyPage from "./components/SupperSocietyPage";
-import mockData from "./mock-data.json";
-const markers = mockData.results; // for development
+
+// import mockData from "./mock-data.json";
+// const markers = mockData.results; // for development
 
 const App = () => {
   // const [markers, setMarkers] = useState([]);
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Map markers={markers} />} />
+        <Route index element={<Home />} />
         <Route path="community" element={<CommunityPage />} />
         <Route path="society" element={<SupperSocietyPage />} />
         <Route path="404" element={<NotFound />} />
