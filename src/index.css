@@ -1,0 +1,18 @@
+/* Home */
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 80vh;
+}
+
+.places-container {
+	width: 100%;
+	overflow-x: scroll;
+}
+
+@media screen and (min-width: 768px) {
+	.container {
+		grid-template-columns: 2fr 1fr;
+	}
+}

@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Map from "./Map";
 import Places from "./Places";
 
-const Home = () => {
-  const [markers, setMarkers] = useState([]);
+import mockData from "../mock-data.json";
+const markers = mockData.results;
 
-  useEffect(() => {
-    fetch("https://arieats.herokuapp.com/places")
-      .then((res) => res.json())
-      .then((data) => setMarkers(data.results))
-      .catch((err) => console.log(err));
-  }, []);
+const Home = () => {
+  const [activeMarker, setActiveMarker] = useState(null);
+  // const [markers, setMarkers] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("https://arieats.herokuapp.com/places")
+  //     .then((res) => res.json())
+  //     .then((data) => setMarkers(data.results))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
-    <>
-      <Map markers={markers} />
-      <Places places={markers} />
-    </>
+    <div className="container">
+      <section className="map-container">
+        <Map markers={markers} activeMarker={activeMarker} setActiveMarker={setActiveMarker} />
+      </section>
+      <section className="places-container">
+        <Places places={markers} activeMarker={activeMarker} setActiveMarker={setActiveMarker} />
+      </section>
+    </div>
   );
 };
 
