@@ -39,3 +39,22 @@ nav {
 		grid-template-columns: 2fr 1fr;
 	}
 }
+
+/* CommunityPage */
+
+.container-community {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.entryForm {
+	border: solid 1px black;
+	display: flex;
+	flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+	.container-community {
+		grid-template-columns: 2fr 1fr;
+	}
+}
