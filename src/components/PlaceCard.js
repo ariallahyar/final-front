@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from "react";
 
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
-  const isActiveMarker = place.place_id === activeMarker;
-  const fieldRef = useRef(null);
+  const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
+  const photoRef = place.photos[0].photo_reference;
+  const imgUrl = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
 
-  const imgUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg";
+  const isActiveMarker = place.place_id === activeMarker;
+  const placeRef = useRef(null);
 
   useEffect(() => {
-    if (isActiveMarker && fieldRef.current) {
-      fieldRef.current.scrollIntoView({
+    if (isActiveMarker && placeRef.current) {
+      placeRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
         inline: "nearest",
@@ -18,7 +19,7 @@ const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
   }, [isActiveMarker]);
 
   return (
-    <div ref={fieldRef}>
+    <div ref={placeRef}>
       <h2
         onClick={() => setActiveMarker(place.place_id)}
         style={{ color: isActiveMarker ? "red" : "inherit" }}
