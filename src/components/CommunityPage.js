@@ -16,9 +16,9 @@ const CommunityPage = () => {
       <h2>Community curated</h2>
       <div className="container-community">
         <section>
-          {recommendations.map(({ nameOfPlace, city, comment, website }) => {
+          {recommendations.map(({ nameOfPlace, city, comment, website, _id }) => {
             return (
-              <article>
+              <article key={_id}>
                 <h4>{nameOfPlace}</h4>
                 <p>{city}</p>
                 <p>{comment}</p>
@@ -29,7 +29,7 @@ const CommunityPage = () => {
             );
           })}
         </section>
-        <CommunityForm />
+        <CommunityForm setRecommendations={setRecommendations} />
       </div>
     </>
   );
