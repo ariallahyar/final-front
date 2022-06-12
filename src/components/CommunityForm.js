@@ -1,4 +1,17 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const Section = styled.section`
+  color: white;
+  background-color: rgb(0, 50, 50);
+  padding: 15px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+`;
 
 const CommunityForm = ({ setRecommendations }) => {
   const [nameOfPlace, setNameOfPlace] = useState("");
@@ -43,14 +56,18 @@ const CommunityForm = ({ setRecommendations }) => {
   };
 
   if (!isAuthorized) {
-    return <h2>Please login to submit a community suggestion</h2>;
+    return (
+      <Section>
+        <h3>Please login to submit a community suggestion</h3>
+      </Section>
+    );
   }
 
   return (
-    <section>
+    <Section>
       <h3>Form</h3>
-      <form className={"entryForm"} onSubmit={handleOnSubmit()}>
-        <label htmlFor={"nameOfPlace"}>Name of place*</label>
+      <Form onSubmit={handleOnSubmit()}>
+        <label htmlFor={"nameOfPlace"}>Name of place</label>
         <input
           id={"nameOfPlace"}
           type={"text"}
@@ -58,7 +75,7 @@ const CommunityForm = ({ setRecommendations }) => {
           onChange={(event) => setNameOfPlace(event.target.value)}
           required
         />
-        <label htmlFor={"city"}>City*</label>
+        <label htmlFor={"city"}>City</label>
         <input
           id={"city"}
           type={"text"}
@@ -66,15 +83,16 @@ const CommunityForm = ({ setRecommendations }) => {
           onChange={(event) => setCity(event.target.value)}
           required
         />
-        <label htmlFor={"comment"}>Comment*</label>
-        <input
+        <label htmlFor={"comment"}>Comment</label>
+        <textarea
           id={"comment"}
           type={"text"}
+          rows={4}
           value={comment}
           onChange={(event) => setComment(event.target.value)}
           required
         />
-        <label htmlFor={"website"}>Website*</label>
+        <label htmlFor={"website"}>Website</label>
         <input
           id={"website"}
           type="url"
@@ -87,8 +105,8 @@ const CommunityForm = ({ setRecommendations }) => {
         <button type="submit" disabled={!city || !nameOfPlace || !website || !comment}>
           Submit
         </button>
-      </form>
-    </section>
+      </Form>
+    </Section>
   );
 };
 
