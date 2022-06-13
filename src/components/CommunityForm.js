@@ -20,9 +20,7 @@ const CommunityForm = ({ setRecommendations }) => {
   const [website, setWebsite] = useState("");
 
   const token = localStorage.getItem("Token");
-
-  // user_id needs to be stored as well?
-  const user_id = "1234";
+  const user_id = "1234"; // user_id needs to be stored as well?
 
   const isAuthorized = true;
 
@@ -48,10 +46,18 @@ const CommunityForm = ({ setRecommendations }) => {
       .catch((error) => console.log(error));
   };
 
+  const resetForm = () => {
+    setNameOfPlace("");
+    setCity("");
+    setComment("");
+    setWebsite("");
+  };
+
   const handleOnSubmit = () => {
     return (event) => {
       event.preventDefault();
       sendRecommendation();
+      resetForm();
     };
   };
 
