@@ -1,23 +1,27 @@
-import React from "react";
-import { useLoadScript, GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
-import mockData from "../mock-data.json";
-
-const places = mockData.results;
+import React, { memo, useCallback, useState, useEffect } from "react";
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 
 const mapContainerStyle = { width: "100%", height: "100%" };
 
 const Map = ({ markers, activeMarker, setActiveMarker }) => {
-  const { isLoaded } = useLoadScript({
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  const [map, setMap] = useState(null);
 
-  const handleOnLoad = (map) => {
-    const bounds = new window.google.maps.LatLngBounds();
-    places.forEach(({ coordinates }) => bounds.extend(coordinates));
-    map.fitBounds(bounds);
-  };
+  const onLoad = useCallback((map) => setMap(map), []);
+
+  useEffect(() => {
+    if (map) {
+      const bounds = new window.google.maps.LatLngBounds();
+      markers.forEach((marker) => {
+        bounds.extend(marker.geometry.location);
+      });
+      map.fitBounds(bounds);
+    }
+  }, [map, markers]);
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -25,6 +29,8 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
     }
     setActiveMarker(marker);
   };
+
+  if (!isLoaded) return <div>Loading...</div>;
 
   const icon = {
     path: "m 12 2.016 q 2.906 0 4.945 2.039 t 2.039 4.945 q 0 1.453 -0.727 3.328 t -1.758 3.516 t -2.039 3.07 t -1.711 2.273 l -0.75 0.797 q -0.281 -0.328 -0.75 -0.867 t -1.688 -2.156 t -2.133 -3.141 t -1.664 -3.445 t -0.75 -3.375 q 0 -2.906 2.039 -4.945 t 4.945 -2.039 z",
@@ -48,16 +54,16 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
 
   return (
     <GoogleMap
-      onLoad={handleOnLoad}
+      onLoad={onLoad}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {markers.map(({ place_id, name, coordinates, description, formatted_address }) => {
+      {markers.map(({ place_id, name, geometry, description, formatted_address }) => {
         const isSelected = activeMarker === place_id;
         return (
           <Marker
             key={place_id}
-            position={coordinates}
+            position={geometry.location}
             icon={isSelected ? iconSelected : icon}
             onClick={() => handleActiveMarker(place_id)}
           >
@@ -77,4 +83,4 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
   );
 };
 
-export default Map;
+export default memo(Map);
