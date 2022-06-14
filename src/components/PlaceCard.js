@@ -36,11 +36,11 @@ const Place = styled.article`
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
   const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
   const photoRef = place.photos[0].photo_reference;
-  // const imgUrl = `https://locations.googleapis.com/locations/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+  const imgUrl = `https://locations.googleapis.com/locations/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
 
   // development
-  const imgUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg";
+  // const imgUrl =
+  //   "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg";
 
   const isActiveMarker = place.place_id === activeMarker;
   const placeRef = useRef(null);
