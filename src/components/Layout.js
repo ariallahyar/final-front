@@ -12,12 +12,12 @@ const Header = styled.header`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: flex-end;
-`;
 
-const Title = styled.h1`
-  padding: 0;
-  margin: 0;
-  color: rgb(0, 50, 50);
+  h1 {
+    padding: 0;
+    margin: 0;
+    color: rgb(0, 50, 50);
+  }
 `;
 
 const Footer = styled.footer`
@@ -36,8 +36,8 @@ const Footer = styled.footer`
 const Layout = () => {
   return (
     <>
-      <Header className="header-container">
-        <Title>Header</Title>
+      <Header>
+        <h1>Header</h1>
         {isMobile ? <NavMobile /> : <NavDesktop />}
       </Header>
       <main>

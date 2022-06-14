@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 85vh;
+  grid-template-rows: 88vh;
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;

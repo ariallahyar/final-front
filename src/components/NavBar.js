@@ -53,13 +53,13 @@ const Menu = styled.nav`
   padding: 32px;
   width: 100vw;
   height: 100vh;
-`;
 
-const MenuLink = styled(Link)`
-  color: inherit;
-  font-size: 22px;
-  margin: 10px 0;
-  text-decoration: none;
+  a {
+    color: inherit;
+    font-size: 22px;
+    margin: 10px 0;
+    text-decoration: none;
+  }
 `;
 
 export const NavMobile = () => {
@@ -75,40 +75,40 @@ export const NavMobile = () => {
       </Hamburger>
       {isOpen && (
         <Menu isOpen={isOpen} onClick={toggle}>
-          <MenuLink to="/">Home</MenuLink>
-          <MenuLink to="/community">Community</MenuLink>
-          <MenuLink to="/society">Supper Society</MenuLink>
+          <Link to="/">Home</Link>
+          <Link to="/community">Community</Link>
+          <Link to="/society">Supper Society</Link>
         </Menu>
       )}
     </>
   );
 };
 
-const Nav = styled.nav`
+const Navbar = styled.nav`
   display: flex;
   justify-content: flex-end;
   gap: 20px;
-`;
 
-const NavLink = styled(Link)`
-  font-size: 18px;
-  letter-spacing: -0.3px;
-  color: rgb(0, 50, 50);
-  text-decoration: none;
+  a {
+    font-size: 18px;
+    letter-spacing: -0.3px;
+    color: rgb(0, 50, 50);
+    text-decoration: none;
 
-  @media (min-width: 768px) {
-    &:hover {
-      text-decoration: underline;
+    @media (min-width: 768px) {
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;
 
 export const NavDesktop = () => {
   return (
-    <Nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/community">Community</NavLink>
-      <NavLink to="/society">Supper Society</NavLink>
-    </Nav>
+    <Navbar>
+      <Link to="/">Home</Link>
+      <Link to="/community">Community</Link>
+      <Link to="/society">Supper Society</Link>
+    </Navbar>
   );
 };
