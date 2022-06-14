@@ -1,8 +1,13 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { NavMobile, NavDesktop } from "./NavBar";
 import styled from "styled-components";
 
-const HeaderStyled = styled.header`
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  navigator.userAgent
+);
+
+const Header = styled.header`
   margin: 10px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -15,25 +20,7 @@ const Title = styled.h1`
   color: rgb(0, 50, 50);
 `;
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
-`;
-
-const NavLink = styled(Link)`
-  font-size: 18px;
-  color: rgb(0, 50, 50);
-  text-decoration: none;
-
-  @media (min-width: 768px) {
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const FooterStyled = styled.footer`
+const Footer = styled.footer`
   position: fixed;
   font-size: 12px;
   left: 0;
@@ -46,31 +33,17 @@ const FooterStyled = styled.footer`
   align-items: center;
 `;
 
-const Header = () => {
-  return (
-    <HeaderStyled className="header-container">
-      <Title>Header</Title>
-      <Nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/community">Community</NavLink>
-        <NavLink to="/society">Supper Society</NavLink>
-      </Nav>
-    </HeaderStyled>
-  );
-};
-
-const Footer = () => {
-  return <FooterStyled>© Ari Allahyar | 2022</FooterStyled>;
-};
-
 const Layout = () => {
   return (
     <>
-      <Header />
+      <Header className="header-container">
+        <Title>Header</Title>
+        {isMobile ? <NavMobile /> : <NavDesktop />}
+      </Header>
       <main>
         <Outlet />
       </main>
-      <Footer />
+      <Footer>© Ari Allahyar | 2022</Footer>
     </>
   );
 };
