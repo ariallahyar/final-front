@@ -12,7 +12,11 @@ const Error = styled.p`
   color: red;
 `;
 
-const LoginForm = () => {
+const SignUpLink = styled(Link)`
+  color: white;
+`;
+
+const Login = ({ setAuthorized }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
@@ -34,20 +38,11 @@ const LoginForm = () => {
         }
       })
       .then((data) => {
-        console.log(data);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("Token", data.token);
+        localStorage.setItem("ID", data._id);
+        setAuthorized(true);
       })
       .catch((error) => console.log(error));
-  };
-
-  const handleOnSubmit = () => {
-    return (event) => {
-      event.preventDefault();
-      console.log(email, password);
-      loginUser();
-      resetForm();
-      alert("you're logged in");
-    };
   };
 
   const resetForm = () => {
@@ -55,8 +50,17 @@ const LoginForm = () => {
     setPassword("");
   };
 
+  const handleOnSubmit = () => {
+    return (event) => {
+      event.preventDefault();
+      loginUser();
+      resetForm();
+    };
+  };
+
   return (
     <>
+      <h3>Login</h3>
       <Form onSubmit={handleOnSubmit()}>
         <label htmlFor={"email"}>Email address</label>
         <input
@@ -80,11 +84,11 @@ const LoginForm = () => {
         </button>
       </Form>
       <p>
-        Don't have an account? <Link to="/profile">Sign up</Link>
+        Don't have an account? <SignUpLink to="/profile">Sign up</SignUpLink>
       </p>
       {errorMessage && <Error>Email and password do not match</Error>}
     </>
   );
 };
 
-export default LoginForm;
+export default Login;

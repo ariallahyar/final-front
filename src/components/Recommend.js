@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LoginForm from "./LoginForm";
-
-const Section = styled.section`
-  color: white;
-  background-color: rgb(0, 50, 50);
-  padding: 15px;
-`;
+import Login from "./Login";
 
 const Form = styled.form`
   display: flex;
@@ -14,7 +8,7 @@ const Form = styled.form`
   row-gap: 5px;
 `;
 
-const CommunityForm = ({ setRecommendations }) => {
+const Recommend = ({ setRecommendations }) => {
   const [nameOfPlace, setNameOfPlace] = useState("");
   const [city, setCity] = useState("");
   const [comment, setComment] = useState("");
@@ -23,13 +17,11 @@ const CommunityForm = ({ setRecommendations }) => {
   const token = localStorage.getItem("Token");
   const user_id = "1234"; // user_id needs to be stored as well?
 
-  const isAuthorized = token;
-
   const sendRecommendation = () => {
     const url = "https://arieats.herokuapp.com/users/auth/recommendation";
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json", Token: token },
+      headers: { "Content-Type": "application/json", Token: localStorage.getItem("Token") },
       body: JSON.stringify({ user_id, city, nameOfPlace, comment, website }),
     };
 
@@ -54,27 +46,20 @@ const CommunityForm = ({ setRecommendations }) => {
     setWebsite("");
   };
 
-  const handleOnSubmit = () => {
-    return (event) => {
-      event.preventDefault();
-      sendRecommendation();
-      resetForm();
-    };
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    sendRecommendation();
+    resetForm();
   };
 
-  if (!isAuthorized) {
-    return (
-      <Section>
-        <h3>Login to submit a suggestion</h3>
-        <LoginForm />
-      </Section>
-    );
+  if (!token) {
+    return <Login />;
   }
 
   return (
-    <Section>
+    <>
       <h3>Form</h3>
-      <Form onSubmit={handleOnSubmit()}>
+      <Form onSubmit={handleOnSubmit}>
         <label htmlFor="nameOfPlace">Name of place</label>
         <input
           id="nameOfPlace"
@@ -114,8 +99,8 @@ const CommunityForm = ({ setRecommendations }) => {
           Submit
         </button>
       </Form>
-    </Section>
+    </>
   );
 };
 
-export default CommunityForm;
+export default Recommend;
