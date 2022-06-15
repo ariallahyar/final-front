@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import Home from "./components/Home";
 import CommunityPage from "./components/CommunityPage";
 import SupperSocietyPage from "./components/SupperSocietyPage";
+import ProfilePage from "./components/ProfilePage";
 import NotFound from "./components/NotFound";
 import { createGlobalStyle } from "styled-components";
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="community" element={<CommunityPage />} />
           <Route path="society" element={<SupperSocietyPage />} />
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} /> */
         </Route>
