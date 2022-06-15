@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faHome, faCircleUser, faUser } from "@fortawesome/free-solid-svg-icons";
 
-export const location = <FontAwesomeIcon icon={faLocationDot} />;
-export const website = <FontAwesomeIcon icon={faHome} />;
-export const profileCircle = <FontAwesomeIcon icon={faCircleUser} />;
-export const profile = <FontAwesomeIcon icon={faUser} />;
+export const addressIcon = <FontAwesomeIcon icon={faLocationDot} />;
+export const websiteIcon = <FontAwesomeIcon icon={faHome} />;
+export const profileCircleIcon = <FontAwesomeIcon icon={faCircleUser} />;
+export const profileIcon = <FontAwesomeIcon icon={faUser} />;

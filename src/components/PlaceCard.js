@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { location, website } from "../assets/icons";
+import { addressIcon, websiteIcon } from "../assets/icons";
 
 const Place = styled.article`
   display: flex;
@@ -61,10 +61,10 @@ const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
         {place.name} {isActiveMarker && <span>&#x25E3;</span>}
       </h2>
       <a href={place.url} target={"_blank"} rel="noreferrer">
-        {location}&nbsp;&nbsp;{place.vicinity}
+        {addressIcon}&nbsp;&nbsp;{place.vicinity}
       </a>
       <a href={place.website} target={"_blank"} rel="noreferrer">
-        {website}&nbsp;{place.website}
+        {websiteIcon}&nbsp;{place.website}
       </a>
       <p>{place.description}</p>
       <img src={imgUrl} alt={"restaurant"} />

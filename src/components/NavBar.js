@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { profileCircle } from "../assets/icons";
+import { profileCircleIcon } from "../assets/icons";
 import styled from "styled-components";
 
 const Hamburger = styled.button`
@@ -113,7 +113,7 @@ export const NavDesktop = () => {
       <Link to="/">Home</Link>
       <Link to="/community">Community</Link>
       <Link to="/society">Supper Society</Link>
-      <Link to="/profile">{profileCircle}</Link>
+      <Link to="/profile">{profileCircleIcon}</Link>
     </Navbar>
   );
 };
