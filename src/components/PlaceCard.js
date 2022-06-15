@@ -36,7 +36,7 @@ const Place = styled.article`
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
   const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
   const photoRef = place.photos[0].photo_reference;
-  const imgUrl = `https://locations.googleapis.com/locations/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+  const imgUrl = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
 
   // development
   // const imgUrl =
