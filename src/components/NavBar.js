@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { profileCircle } from "../assets/icons";
 import styled from "styled-components";
 
 const Hamburger = styled.button`
@@ -13,6 +14,8 @@ const Hamburger = styled.button`
   border: none;
   padding: 0;
   z-index: 10;
+  position: ${({ isOpen }) => (isOpen ? "fixed" : "null")};
+  right: ${({ isOpen }) => (isOpen ? "20px" : "null")};
 
   div {
     width: 32px;
@@ -45,7 +48,7 @@ const Menu = styled.nav`
   color: white;
   background: rgb(0, 50, 50);
   transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(-100%)")};
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 5;
@@ -78,6 +81,7 @@ export const NavMobile = () => {
           <Link to="/">Home</Link>
           <Link to="/community">Community</Link>
           <Link to="/society">Supper Society</Link>
+          <Link to="/profile">Profile</Link>
         </Menu>
       )}
     </>
@@ -109,6 +113,7 @@ export const NavDesktop = () => {
       <Link to="/">Home</Link>
       <Link to="/community">Community</Link>
       <Link to="/society">Supper Society</Link>
+      <Link to="/profile">{profileCircle}</Link>
     </Navbar>
   );
 };
