@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import LoginForm from "./LoginForm";
 
 const Section = styled.section`
   color: white;
@@ -22,7 +23,7 @@ const CommunityForm = ({ setRecommendations }) => {
   const token = localStorage.getItem("Token");
   const user_id = "1234"; // user_id needs to be stored as well?
 
-  const isAuthorized = true;
+  const isAuthorized = token;
 
   const sendRecommendation = () => {
     const url = "https://arieats.herokuapp.com/users/auth/recommendation";
@@ -64,7 +65,8 @@ const CommunityForm = ({ setRecommendations }) => {
   if (!isAuthorized) {
     return (
       <Section>
-        <h3>Please login to submit a community suggestion</h3>
+        <h3>Login to submit a suggestion</h3>
+        <LoginForm />
       </Section>
     );
   }
@@ -73,34 +75,34 @@ const CommunityForm = ({ setRecommendations }) => {
     <Section>
       <h3>Form</h3>
       <Form onSubmit={handleOnSubmit()}>
-        <label htmlFor={"nameOfPlace"}>Name of place</label>
+        <label htmlFor="nameOfPlace">Name of place</label>
         <input
-          id={"nameOfPlace"}
-          type={"text"}
+          id="nameOfPlace"
+          type="text"
           value={nameOfPlace}
           onChange={(event) => setNameOfPlace(event.target.value)}
           required
         />
-        <label htmlFor={"city"}>City</label>
+        <label htmlFor="city">City</label>
         <input
-          id={"city"}
-          type={"text"}
+          id="city"
+          type="text"
           value={city}
           onChange={(event) => setCity(event.target.value)}
           required
         />
-        <label htmlFor={"comment"}>Comment</label>
+        <label htmlFor="comment">Comment</label>
         <textarea
-          id={"comment"}
-          type={"text"}
+          id="comment"
+          type="text"
           rows={4}
           value={comment}
           onChange={(event) => setComment(event.target.value)}
           required
         />
-        <label htmlFor={"website"}>Website</label>
+        <label htmlFor="website">Website</label>
         <input
-          id={"website"}
+          id="website"
           type="url"
           value={website}
           onChange={(event) => setWebsite(event.target.value)}
