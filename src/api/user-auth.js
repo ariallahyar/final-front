@@ -1,7 +1,7 @@
 import { API_URL } from "./api";
 
 export const createAccount = (name, email, password, error, callback) => {
-  fetch(`${API_URL}/users`, {
+  fetch(`${API_URL}/user`, {
     method: "POST",
     body: JSON.stringify({ name, email, password }),
     headers: { "Content-Type": "application/json" },
@@ -10,12 +10,16 @@ export const createAccount = (name, email, password, error, callback) => {
       if (response.ok) return response.json();
       return error(true);
     })
-    .then(() => callback())
+    .then((data) => {
+      localStorage.setItem("Token", data.token);
+      localStorage.setItem("ID", data._id);
+      callback();
+    })
     .catch((error) => console.log(error));
 };
 
 export const login = (email, password, error, callback) => {
-  fetch(`${API_URL}/users/auth`, {
+  fetch(`${API_URL}/user/auth`, {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" },
@@ -34,7 +38,7 @@ export const login = (email, password, error, callback) => {
 };
 
 export const logout = (callback) => {
-  fetch(`${API_URL}/users/auth`, {
+  fetch(`${API_URL}/user/auth`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json", Token: localStorage.getItem("Token") },
   })
@@ -53,7 +57,7 @@ export const logout = (callback) => {
 export const deleteAccount = (callback) => {
   const id = localStorage.getItem("ID");
 
-  fetch(`${API_URL}/users/`, {
+  fetch(`${API_URL}/user/`, {
     method: "DELETE",
     body: JSON.stringify({ _id: id }),
     headers: { "Content-Type": "application/json", Token: localStorage.getItem("Token") },

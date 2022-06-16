@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Recommend from "./Recommend";
 import Login from "./Login";
-import { getRecommendations } from "../api/recommendations";
+import { getRecommendations } from "../api/recommendation";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -49,9 +49,15 @@ const CommunityPage = () => {
       </section>
       <Form>
         {authorized ? (
-          <Recommend authorized={authorized} setRecommendations={setRecommendations} />
+          <>
+            <h3>Submit a recommendation</h3>
+            <Recommend authorized={authorized} setRecommendations={setRecommendations} />
+          </>
         ) : (
-          <Login setAuthorized={setAuthorized} />
+          <>
+            <h3>Log in to submit a recommendation</h3>
+            <Login setAuthorized={setAuthorized} />
+          </>
         )}
       </Form>
     </Container>

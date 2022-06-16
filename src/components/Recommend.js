@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "./Login";
-import { sendRecommendation } from "../api/recommendations";
+import { sendRecommendation } from "../api/recommendation";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -37,7 +37,7 @@ const Recommend = ({ setRecommendations }) => {
 
   return (
     <>
-      <h3>Form</h3>
+      <h4>Fill in the following details</h4>
       <Form onSubmit={handleOnSubmit}>
         <label htmlFor="nameOfPlace">Name of place</label>
         <input

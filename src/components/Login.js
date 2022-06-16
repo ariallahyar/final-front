@@ -32,7 +32,10 @@ const Login = ({ setAuthorized }) => {
       email,
       password,
       () => setErrorMessage(true),
-      () => setIsRegistered(true)
+      () => {
+        setIsRegistered(true);
+        setAuthorized(true);
+      }
     );
     resetForm();
   };
