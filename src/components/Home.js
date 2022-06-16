@@ -51,7 +51,7 @@ const Home = () => {
   // const [markers, setMarkers] = useState([]);
 
   // useEffect(() => {
-  //   fetch(`https://arieats.herokuapp.com/places?city=${city}`)
+  //   fetch(`${API_URL}/places?city=${city}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setMarkers(data.results);

@@ -1,46 +1,30 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useState } from "react";
 import { profileIcon } from "../assets/icons";
 import Login from "./Login";
+import { logout, deleteAccount } from "../api/user-auth";
 
 const ProfilePage = () => {
-  const token = localStorage.getItem("Token");
-  const navigate = useNavigate();
+  const [token, setToken] = useState(() => localStorage.getItem("Token"));
 
-  const deleteAccount = (event) => {
+  const handleOnSubmit = (event) => {
     event.preventDefault();
-    const url = "https://arieats.herokuapp.com/users/";
-    const id = localStorage.getItem("ID");
-
-    const options = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _id: id }),
-    };
-
-    console.log("hello");
-
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.removeItem("ID");
-        localStorage.removeItem("Token");
-        navigate("/profile");
-      })
-      .catch((error) => console.log(error));
+    deleteAccount(() => setToken(localStorage.getItem("Token")));
   };
 
-  if (!token) {
-    return <Login />;
-  }
+  const handleOnSubmitLogout = (event) => {
+    event.preventDefault();
+    logout(() => setToken(localStorage.getItem("Token")));
+  };
+
+  if (!token) return <Login />;
 
   return (
     <section>
       <h2>{profileIcon} Welcome to your profile page</h2>
-      <form onSubmit={() => localStorage.removeItem("Token")}>
+      <form onSubmit={handleOnSubmitLogout}>
         <button type="submit">Log Out</button>
       </form>
-      <form onSubmit={deleteAccount}>
+      <form onSubmit={handleOnSubmit}>
         <button type="submit">Delete Account</button>
       </form>
     </section>

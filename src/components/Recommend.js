@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Login from "./Login";
+import { sendRecommendation } from "../api/recommendations";
 
 const Form = styled.form`
   display: flex;
@@ -17,28 +18,6 @@ const Recommend = ({ setRecommendations }) => {
   const token = localStorage.getItem("Token");
   const user_id = "1234"; // user_id needs to be stored as well?
 
-  const sendRecommendation = () => {
-    const url = "https://arieats.herokuapp.com/users/auth/recommendation";
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Token: localStorage.getItem("Token") },
-      body: JSON.stringify({ user_id, city, nameOfPlace, comment, website }),
-    };
-
-    fetch(url, options)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Validation error");
-        } else {
-          return response.json();
-        }
-      })
-      .then((newRecommendation) => {
-        setRecommendations((previousRecs) => [newRecommendation.result, ...previousRecs]);
-      })
-      .catch((error) => console.log(error));
-  };
-
   const resetForm = () => {
     setNameOfPlace("");
     setCity("");
@@ -48,13 +27,13 @@ const Recommend = ({ setRecommendations }) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    sendRecommendation();
+    sendRecommendation(user_id, city, nameOfPlace, comment, website, (newRec) =>
+      setRecommendations((previousRecs) => [newRec, ...previousRecs])
+    );
     resetForm();
   };
 
-  if (!token) {
-    return <Login />;
-  }
+  if (!token) return <Login />;
 
   return (
     <>

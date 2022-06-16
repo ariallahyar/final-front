@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Recommend from "./Recommend";
 import styled from "styled-components";
 import Login from "./Login";
+import { getRecommendations } from "../api/recommendations";
 
 const Container = styled.div`
   display: grid;
@@ -27,12 +28,7 @@ const CommunityPage = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
 
-  useEffect(() => {
-    fetch("https://arieats.herokuapp.com/recommendations")
-      .then((res) => res.json())
-      .then((data) => setRecommendations(data.results))
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(() => getRecommendations((results) => setRecommendations(results)), []);
 
   return (
     <Container>
