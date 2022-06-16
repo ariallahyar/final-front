@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Login from "./Login";
 import { sendRecommendation } from "../api/recommendations";
+import styled from "styled-components";
 
 const Form = styled.form`
   display: flex;
@@ -16,7 +16,7 @@ const Recommend = ({ setRecommendations }) => {
   const [website, setWebsite] = useState("");
 
   const token = localStorage.getItem("Token");
-  const user_id = "1234"; // user_id needs to be stored as well?
+  const user_id = localStorage.getItem("ID");
 
   const resetForm = () => {
     setNameOfPlace("");

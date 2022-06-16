@@ -1,37 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { utensilsIcon, boltIcon, awardIcon } from "../assets/icons";
 
 const Section = styled.section`
   * {
     margin: 0;
-  }
-
-  h2 {
-    font-size: 38px;
-    margin-top: 20px;
-    text-transform: uppercase;
     color: rgb(0, 50, 50);
   }
 
   display: grid;
-  justify-items: center;
   grid-template-columns: 1fr;
-  width: 600px;
+  max-width: 600px;
   margin: 0 auto;
 
+  h2 {
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+
   h3 {
-    color: rgb(0, 50, 50);
+    font-size: 16px;
+    letter-spacing: -0.5px;
     margin: 20px 0 5px 0;
   }
 
   p {
+    line-height: 26px;
+  }
+
+  input {
+    font-size: 16px;
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: 16px;
+  }
+
+  form {
+    margin: 10px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    color: white;
+    background-color: blue;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
   }
 `;
 
+const ThankYou = styled.div`
+  margin: 10px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const SupperSocietyPage = () => {
+  const [didSubmit, setDidSubmit] = useState(false);
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    setDidSubmit(!didSubmit);
+  };
+
   return (
     <Section>
-      <h2>Supper Society</h2>
+      <h2>{utensilsIcon} Supper Society</h2>
       <h3>Why join Supper Society?</h3>
       <p>
         Supper Society brings people together to share their love of food by arranging dining
@@ -44,14 +82,22 @@ const SupperSocietyPage = () => {
         requirement to host for those that can't be trusted in the kitchen.
       </p>
       <h3>How much does it cost?</h3>
-      <p>Dinner guests split the grocery costs with the other diners. Costs vary per occasion.</p>
+      <p>Dinner guests split grocery costs with the other diners. Costs vary per occasion.</p>
       <h3>What about drinks?</h3>
       <p>To accommodate all preferences, guests are asked to BYOB or whatever floats their boat.</p>
-      <h3>I'm in 🙌 Keep me updated!</h3>
-      <form>
-        <input id={"signup"} type="email" placeholder="test@example.com" required />
-        <button type="submit">Sign up</button>
-      </form>
+      {didSubmit ? (
+        <ThankYou>
+          <h3>Thanks for signing up {awardIcon} Stay tuned!</h3>
+        </ThankYou>
+      ) : (
+        <form onSubmit={handleOnSubmit}>
+          <h3>I'm in {boltIcon} Keep me updated!</h3>
+          <div>
+            <input id={"signup"} type="email" placeholder="example@test.com" required />
+            <button type="submit">Sign up</button>
+          </div>
+        </form>
+      )}
     </Section>
   );
 };

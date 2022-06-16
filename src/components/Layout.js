@@ -28,6 +28,7 @@ const Footer = styled.footer`
   width: 100%;
   height: 20px;
   color: rgb(0, 50, 50);
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;

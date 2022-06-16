@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Recommend from "./Recommend";
-import styled from "styled-components";
 import Login from "./Login";
 import { getRecommendations } from "../api/recommendations";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: grid;

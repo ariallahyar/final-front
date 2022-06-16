@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { createAccount, login } from "../api/user-auth";
+import styled from "styled-components";
 
 const Form = styled.form`
   display: flex;
