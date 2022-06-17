@@ -1,5 +1,7 @@
 import React, { memo, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
+import { websiteIcon, addressIcon } from "../assets/icons";
+import styled from "styled-components";
 
 const mapContainerStyle = { width: "100%", height: "100%" };
 
@@ -58,7 +60,7 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {markers.map(({ place_id, name, geometry, description, formatted_address }) => {
+      {markers.map(({ place_id, url, website, name, geometry, description, vicinity }) => {
         const isSelected = activeMarker === place_id;
         return (
           <Marker
@@ -69,11 +71,22 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
           >
             {isSelected && (
               <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                <div>
-                  <h2>{name}</h2>
-                  <h3>{formatted_address}</h3>
+                <Container>
+                  <h3>{name}</h3>
+                  <a href={website} target={"_blank"} rel="noreferrer">
+                    {websiteIcon}&nbsp;Website
+                  </a>
+                  <a href={url} target={"_blank"} rel="noreferrer">
+                    &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
+                  </a>
                   <p>{description}</p>
-                </div>
+                  <img
+                    src={
+                      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg"
+                    }
+                    alt={"restaurant"}
+                  />
+                </Container>
               </InfoWindow>
             )}
           </Marker>
@@ -84,3 +97,31 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
 };
 
 export default memo(Map);
+
+const Container = styled.div`
+  width: 180px;
+  max-height: 250px;
+  overflow-y: scroll;
+  padding: 0px 10px 0px 0px;
+  margin: 0;
+  border-bottom: 10px solid white;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin: 0 0 5px 0;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+  img {
+    width: 100%;
+    align-self: center;
+  }
+
+  a {
+    text-decoration: none;
+  }
+`;
