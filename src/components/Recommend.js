@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import { sendRecommendation } from "../api/recommendation";
+import { starIcon } from "../assets/icons";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -14,6 +15,7 @@ const Recommend = ({ setRecommendations }) => {
   const [city, setCity] = useState("");
   const [comment, setComment] = useState("");
   const [website, setWebsite] = useState("");
+  const [didSubmit, setDidSubmit] = useState(false);
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("ID");
@@ -31,9 +33,19 @@ const Recommend = ({ setRecommendations }) => {
       setRecommendations((previousRecs) => [newRec, ...previousRecs])
     );
     resetForm();
+    setDidSubmit(true);
   };
 
   if (!token) return <Login />;
+
+  if (didSubmit)
+    return (
+      <>
+        <h4>Thanks for contributing to our community! {starIcon}</h4>
+        <p>Do you have another recommendation to submit?</p>
+        <button onClick={() => setDidSubmit(!didSubmit)}>Let's go</button>
+      </>
+    );
 
   return (
     <>

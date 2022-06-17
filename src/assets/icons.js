@@ -6,7 +6,8 @@ import {
   faUser,
   faRocket,
   faUtensils,
-	faBolt,
+  faBolt,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const addressIcon = <FontAwesomeIcon icon={faLocationDot} />;
@@ -16,3 +17,4 @@ export const profileIcon = <FontAwesomeIcon icon={faUser} />;
 export const awardIcon = <FontAwesomeIcon icon={faRocket} />;
 export const utensilsIcon = <FontAwesomeIcon icon={faUtensils} />;
 export const boltIcon = <FontAwesomeIcon icon={faBolt} />;
+export const starIcon = <FontAwesomeIcon icon={faStar} />;
