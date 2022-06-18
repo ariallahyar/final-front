@@ -60,7 +60,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {markers.map(({ place_id, url, website, name, geometry, description, vicinity }) => {
+      {markers.map(({ place_id, url, website, name, geometry, description }) => {
         const isSelected = activeMarker === place_id;
         return (
           <Marker
@@ -69,17 +69,19 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
             icon={isSelected ? iconSelected : icon}
             onClick={() => handleActiveMarker(place_id)}
           >
-            {isSelected && (
-              <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                <InfoWindowDetails
-                  isMobile={isMobile}
-                  name={name}
-                  website={website}
-                  url={url}
-                  description={description}
-                />
-              </InfoWindow>
-            )}
+            {isSelected &&
+              (!isMobile ? (
+                map.panTo(geometry.location)
+              ) : (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <InfoWindowDetails
+                    name={name}
+                    website={website}
+                    url={url}
+                    description={description}
+                  />
+                </InfoWindow>
+              ))}
           </Marker>
         );
       })}
@@ -89,7 +91,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
 
 export default memo(Map);
 
-const MobileDetails = styled.div`
+const StyledDetails = styled.div`
   width: 180px;
   max-height: 250px;
   overflow-y: scroll;
@@ -117,15 +119,9 @@ const MobileDetails = styled.div`
   }
 `;
 
-const DesktopDetails = styled.h3`
-  margin: 0;
-`;
-
-const InfoWindowDetails = ({ isMobile, name, website, url, description }) => {
-  if (!isMobile) return <DesktopDetails>{name}</DesktopDetails>;
-
+const InfoWindowDetails = ({ name, website, url, description }) => {
   return (
-    <MobileDetails>
+    <StyledDetails>
       <h3>{name}</h3>
       <a href={website} target={"_blank"} rel="noreferrer">
         {websiteIcon}&nbsp;Website
@@ -140,6 +136,6 @@ const InfoWindowDetails = ({ isMobile, name, website, url, description }) => {
         }
         alt={"restaurant"}
       />
-    </MobileDetails>
+    </StyledDetails>
   );
 };
