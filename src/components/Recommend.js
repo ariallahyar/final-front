@@ -8,6 +8,38 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+
+  label {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  input {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  button {
+    margin-top: 16px;
+    border-radius: 5px;
+    padding: 5px;
+  }
+`;
+
+const ButtonInLine = styled.button`
+  padding: 5px;
+  margin: 0;
+  color: inherit;
+  background-color: inherit;
+  font-family: inherit;
+  border: none;
+  text-decoration: underline;
+  font-size: inherit;
+  font-weight: inherits;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Recommend = ({ setRecommendations }) => {
@@ -15,7 +47,7 @@ const Recommend = ({ setRecommendations }) => {
   const [city, setCity] = useState("");
   const [comment, setComment] = useState("");
   const [website, setWebsite] = useState("");
-  const [didSubmit, setDidSubmit] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(true);
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("ID");
@@ -42,8 +74,12 @@ const Recommend = ({ setRecommendations }) => {
     return (
       <>
         <h4>Thanks for contributing to our community! {starIcon}</h4>
-        <p>Do you have another recommendation to submit?</p>
-        <button onClick={() => setDidSubmit(!didSubmit)}>Let's go</button>
+        <p>
+          Do you want to submit another recommendation?
+          <span>
+            <ButtonInLine onClick={() => setDidSubmit(!didSubmit)}>Let's go</ButtonInLine>
+          </span>
+        </p>
       </>
     );
 
