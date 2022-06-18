@@ -7,14 +7,19 @@ import styled from "styled-components";
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 88vh;
 
   section {
-    overflow-x: scroll;
+    margin-bottom: 30px;
   }
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
+
+    section {
+      height: 88vh;
+      margin-bottom: 0;
+      overflow-x: scroll;
+    }
   }
 `;
 

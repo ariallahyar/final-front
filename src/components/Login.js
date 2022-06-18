@@ -3,9 +3,26 @@ import { createAccount, login } from "../api/user-auth";
 import styled from "styled-components";
 
 const Form = styled.form`
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+
+  label {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  input {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  button {
+    margin-top: 16px;
+    border-radius: 5px;
+    padding: 5px;
+  }
 `;
 
 const Error = styled.p`
