@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const mapContainerStyle = { width: "100%", height: "100%" };
 
-const Map = ({ markers, activeMarker, setActiveMarker }) => {
+const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -71,22 +71,13 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
           >
             {isSelected && (
               <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                <Container>
-                  <h3>{name}</h3>
-                  <a href={website} target={"_blank"} rel="noreferrer">
-                    {websiteIcon}&nbsp;Website
-                  </a>
-                  <a href={url} target={"_blank"} rel="noreferrer">
-                    &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
-                  </a>
-                  <p>{description}</p>
-                  <img
-                    src={
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg"
-                    }
-                    alt={"restaurant"}
-                  />
-                </Container>
+                <InfoWindowDetails
+                  isMobile={isMobile}
+                  name={name}
+                  website={website}
+                  url={url}
+                  description={description}
+                />
               </InfoWindow>
             )}
           </Marker>
@@ -98,7 +89,7 @@ const Map = ({ markers, activeMarker, setActiveMarker }) => {
 
 export default memo(Map);
 
-const Container = styled.div`
+const MobileDetails = styled.div`
   width: 180px;
   max-height: 250px;
   overflow-y: scroll;
@@ -125,3 +116,30 @@ const Container = styled.div`
     text-decoration: none;
   }
 `;
+
+const DesktopDetails = styled.h3`
+  margin: 0;
+`;
+
+const InfoWindowDetails = ({ isMobile, name, website, url, description }) => {
+  if (!isMobile) return <DesktopDetails>{name}</DesktopDetails>;
+
+  return (
+    <MobileDetails>
+      <h3>{name}</h3>
+      <a href={website} target={"_blank"} rel="noreferrer">
+        {websiteIcon}&nbsp;Website
+      </a>
+      <a href={url} target={"_blank"} rel="noreferrer">
+        &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
+      </a>
+      <p>{description}</p>
+      <img
+        src={
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg"
+        }
+        alt={"restaurant"}
+      />
+    </MobileDetails>
+  );
+};
