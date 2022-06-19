@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+// import { getPhoto } from "../api/place";
 import { addressIcon, websiteIcon } from "../assets/icons";
 
 const Place = styled.article`
@@ -34,12 +35,16 @@ const Place = styled.article`
 `;
 
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
-  const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
-  const photoRef = place.photos[0].photo_reference;
-  const imgUrl = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+  // const [image, setImage] = useState(null);
 
-  // development
-  // const imgUrl =
+  const photoRef = place.photos[0].photo_reference;
+  const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
+  const image = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+
+  // useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
+
+  // // development
+  // const image =
   //   "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg";
 
   const isActiveMarker = place.place_id === activeMarker;
@@ -67,7 +72,7 @@ const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
         {websiteIcon}&nbsp;{place.website}
       </a>
       <p>{place.description}</p>
-      <img src={imgUrl} alt={"restaurant"} />
+      <img src={image} alt={"restaurant"} />
     </Place>
   );
 };
