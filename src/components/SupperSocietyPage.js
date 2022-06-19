@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { subscribe } from "../api/subscriber";
 import { utensilsIcon, boltIcon, awardIcon } from "../assets/icons";
 
 const Section = styled.section`
@@ -60,11 +61,12 @@ const ThankYou = styled.div`
 `;
 
 const SupperSocietyPage = () => {
+  const [email, setEmail] = useState("");
   const [didSubmit, setDidSubmit] = useState(false);
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    setDidSubmit(!didSubmit);
+    subscribe(email, () => setDidSubmit(!didSubmit));
   };
 
   return (
@@ -87,14 +89,21 @@ const SupperSocietyPage = () => {
       <p>To accommodate all preferences, guests are asked to BYOB or whatever floats their boat.</p>
       {didSubmit ? (
         <ThankYou>
-          <h3>Thanks for signing up {awardIcon} Stay tuned!</h3>
+          <h3>Thanks for subscribing {awardIcon} Stay tuned!</h3>
         </ThankYou>
       ) : (
         <form onSubmit={handleOnSubmit}>
           <h3>I'm in {boltIcon} Keep me updated!</h3>
           <div>
-            <input id={"signup"} type="email" placeholder="example@test.com" required />
-            <button type="submit">Sign up</button>
+            <input
+              id={"signup"}
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="example@test.com"
+              required
+            />
+            <button type="submit">Subscribe</button>
           </div>
         </form>
       )}
