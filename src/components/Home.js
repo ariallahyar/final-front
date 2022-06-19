@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Map from "./Map";
 import Places from "./Places";
-import { getPlaces } from "../api/place";
+// import { getPlaces } from "../api/place";
 import styled from "styled-components";
 
 // development
