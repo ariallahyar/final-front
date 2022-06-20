@@ -23,11 +23,12 @@ const Container = styled.div`
   }
 `;
 
-const Form = styled.section`
+const FormContainer = styled.section(({ theme }) => `
   color: white;
-  background-color: rgb(0, 50, 50);
-  padding: 15px;
-`;
+  background-color: ${theme.colors.primary};
+  padding: 20px;
+`
+);
 
 const CommunityPage = () => {
   const [recommendations, setRecommendations] = useState([]);
@@ -52,7 +53,7 @@ const CommunityPage = () => {
           );
         })}
       </section>
-      <Form>
+      <FormContainer>
         {authorized ? (
           <>
             <h3>Submit a recommendation</h3>
@@ -64,7 +65,7 @@ const CommunityPage = () => {
             <Login setAuthorized={setAuthorized} />
           </>
         )}
-      </Form>
+      </FormContainer>
     </Container>
   );
 };

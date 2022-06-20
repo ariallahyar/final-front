@@ -1,29 +1,7 @@
 import React, { useState } from "react";
 import { createAccount, login } from "../api/user-auth";
+import { SubmitButton } from "./Button";
 import styled from "styled-components";
-
-const Form = styled.form`
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-
-  label {
-    margin-top: 8px;
-    font-size: 14px;
-  }
-
-  input {
-    margin: 0;
-    font-size: 16px;
-  }
-
-  button {
-    margin-top: 16px;
-    border-radius: 5px;
-    padding: 5px;
-  }
-`;
 
 const Error = styled.p`
   color: red;
@@ -71,7 +49,7 @@ const Login = ({ setAuthorized }) => {
   return (
     <>
       <h3>{isRegistered ? "Log In" : "Sign Up"}</h3>
-      <Form onSubmit={isRegistered ? loginOnSubmit : signUpOnSubmit}>
+      <form onSubmit={isRegistered ? loginOnSubmit : signUpOnSubmit}>
         {!isRegistered && (
           <>
             <label htmlFor={"name"}>Name</label>
@@ -101,10 +79,8 @@ const Login = ({ setAuthorized }) => {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <button type="submit" disabled={!password || !email}>
-          {isRegistered ? "Log In" : "Sign Up"}
-        </button>
-      </Form>
+        <SubmitButton disabled={!password || !email} label={isRegistered ? "Log In" : "Sign Up"} />
+      </form>
       <p>
         {isRegistered ? "Don't" : "Already"} have an account?{" "}
         <button onClick={() => setIsRegistered(isRegistered ? false : true)}>

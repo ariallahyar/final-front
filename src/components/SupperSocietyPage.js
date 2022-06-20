@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { subscribe } from "../api/subscriber";
 import { utensilsIcon, boltIcon, awardIcon } from "../assets/icons";
+import { SubmitButton } from "./Button";
 
-const Section = styled.section`
-  * {
-    margin: 0;
-    color: rgb(0, 50, 50);
-  }
-
-  display: grid;
-  grid-template-columns: 1fr;
+const Section = styled.section(({ theme }) => `
+  color: ${theme.colors.primary};
   max-width: 600px;
   margin: 0 auto;
+  text-align: center;
 
   h2 {
     margin-top: 20px;
@@ -26,32 +22,10 @@ const Section = styled.section`
   }
 
   p {
-    line-height: 26px;
+    text-align: left;
   }
-
-  input {
-    font-size: 16px;
-    border-radius: 3px;
-    padding: 3px 10px;
-    font-size: 16px;
-  }
-
-  form {
-    margin: 10px 0 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  button {
-    color: white;
-    background-color: blue;
-    padding: 5px 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 3px;
-  }
-`;
+`
+);
 
 const ThankYou = styled.div`
   margin: 10px 0 20px 0;
@@ -103,7 +77,7 @@ const SupperSocietyPage = () => {
               placeholder="example@test.com"
               required
             />
-            <button type="submit">Subscribe</button>
+            <SubmitButton disabled={!email} label="Subscribe" />
           </div>
         </form>
       )}

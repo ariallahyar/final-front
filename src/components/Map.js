@@ -60,7 +60,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {markers.map(({ place_id, url, website, name, geometry, description }) => {
+      {markers.map(({ place_id, url, website, name, photos, geometry, description }) => {
         const isSelected = activeMarker === place_id;
         return (
           <Marker
@@ -77,6 +77,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
                   <InfoWindowDetails
                     name={name}
                     website={website}
+                    photoRef={photos[0].photo_reference}
                     url={url}
                     description={description}
                   />
@@ -109,17 +110,12 @@ const StyledDetails = styled.div`
     margin: 10px 0;
   }
 
-  img {
-    width: 100%;
-    align-self: center;
-  }
-
-  a {
-    text-decoration: none;
-  }
 `;
 
-const InfoWindowDetails = ({ name, website, url, description }) => {
+const InfoWindowDetails = ({ name, website, url, description, photoRef }) => {
+  const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
+  const image = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+
   return (
     <StyledDetails>
       <h3>{name}</h3>
@@ -130,12 +126,7 @@ const InfoWindowDetails = ({ name, website, url, description }) => {
         &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
       </a>
       <p>{description}</p>
-      <img
-        src={
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg"
-        }
-        alt={"restaurant"}
-      />
+      <img src={image} alt={"restaurant"} />
     </StyledDetails>
   );
 };

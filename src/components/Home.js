@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Map from "./Map";
 import Places from "./Places";
-// import { getPlaces } from "../api/place";
+import { getPlaces } from "../api/place";
 import styled from "styled-components";
 
 // development
-import data from "../mock-data.json";
-
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-  navigator.userAgent
-);
+// import data from "../mock-data.json";
 
 const Container = styled.div`
   display: grid;
@@ -20,10 +16,10 @@ const Container = styled.div`
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 88vh;
   }
-`;
 
-const MapContainer = styled.section`
-  position: relative;
+  section {
+    position: relative;
+  }
 `;
 
 const SelectCityOverlay = styled.select`
@@ -49,24 +45,24 @@ const SelectCityOverlay = styled.select`
 
 const options = ["Copenhagen", "Seattle"];
 
-const Home = () => {
+const Home = ({ isMobile }) => {
   const [activeMarker, setActiveMarker] = useState(null);
   const [city, setCity] = useState("Copenhagen");
-  // const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
-  // useEffect(() => getPlaces(city, (data) => setMarkers(data)), [city]);
+  useEffect(() => getPlaces(city, (data) => setMarkers(data)), [city]);
 
   // development
-  const [markers, setMarkers] = useState(data.results.filter((result) => result.city === city));
+  // const [markers, setMarkers] = useState(data.results.filter((result) => result.city === city));
 
-  useEffect(() => {
-    setMarkers(() => data.results.filter((result) => result.city === city));
-  }, [city]);
+  // useEffect(() => {
+  //   setMarkers(() => data.results.filter((result) => result.city === city));
+  // }, [city]);
 
   return (
     <>
       <Container>
-        <MapContainer>
+        <section>
           <SelectCityOverlay value={city} onChange={(event) => setCity(event.target.value)}>
             {options.map((option, index) => (
               <option key={index} value={option}>
@@ -81,7 +77,7 @@ const Home = () => {
             setActiveMarker={setActiveMarker}
             isMobile={isMobile}
           />
-        </MapContainer>
+        </section>
         {!isMobile && (
           <Places places={markers} activeMarker={activeMarker} setActiveMarker={setActiveMarker} />
         )}

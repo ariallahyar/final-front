@@ -1,49 +1,41 @@
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
 // import { getPhoto } from "../api/place";
 import { addressIcon, websiteIcon } from "../assets/icons";
+import styled from "styled-components";
 
-const Place = styled.article`
-  display: flex;
-  flex-direction: column;
+const Place = styled.article(({ theme }) => `
+  margin-bottom: 20px;
 
   h2 {
-    margin: 20px 0 10px 0;
-    padding-bottom: 2px;
+    margin-bottom: 5px;
   }
 
   span {
-    font-size: 12px;
-    color: rgb(255, 65, 65);
+    font-size: ${theme.fontSizes.tiny};
+    color: ${theme.colors.secondary};
+  }
+
+  p {
+    margin: 10px 0;
   }
 
   a {
-    font-size: 14px;
-    text-decoration: none;
-    color: inherit;
-
-    @media (min-width: 768px) {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+    font-size: ${theme.fontSizes.small};
   }
-
-  img {
-    width: 100%;
-  }
-`;
+`
+);
 
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
-  // const [image, setImage] = useState(null);
-
+  
   const photoRef = place.photos[0].photo_reference;
   const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
   const image = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
-
+  
+  // SERVER-SIDE CALL, NOT WORKING
+  // const [image, setImage] = useState(null);
   // useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
 
-  // // development
+  // DEVELOPMENT MODE
   // const image =
   //   "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Raspberries_%28Rubus_idaeus%29.jpg/1200px-Raspberries_%28Rubus_idaeus%29.jpg";
 

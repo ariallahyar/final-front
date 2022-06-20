@@ -2,13 +2,14 @@ import React from "react";
 import PlaceCard from "./PlaceCard";
 import styled from "styled-components";
 
-const Section = styled.section`
+const Section = styled.section(({ theme }) => `
   overflow-x: scroll;
   color: white;
-  background-color: rgb(0, 50, 50);
-  border-bottom: solid 20px rgb(0, 50, 50);
+  background-color: ${theme.colors.primary};
+  border-bottom: solid 20px ${theme.colors.primary};
   padding: 20px;
-`;
+`
+);
 
 const Places = ({ places, activeMarker, setActiveMarker }) => {
   return (

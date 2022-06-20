@@ -3,10 +3,6 @@ import { Outlet } from "react-router-dom";
 import { NavMobile, NavDesktop } from "./NavBar";
 import styled from "styled-components";
 
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-  navigator.userAgent
-);
-
 const Header = styled.header`
   margin: 10px 0;
   display: grid;
@@ -34,7 +30,7 @@ const Footer = styled.footer`
   align-items: center;
 `;
 
-const Layout = () => {
+const Layout = ({ isMobile }) => {
   return (
     <>
       <Header>

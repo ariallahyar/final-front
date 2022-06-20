@@ -2,45 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import { sendRecommendation } from "../api/recommendation";
 import { starIcon } from "../assets/icons";
-import styled from "styled-components";
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-
-  label {
-    margin-top: 8px;
-    font-size: 14px;
-  }
-
-  input {
-    margin: 0;
-    font-size: 16px;
-  }
-
-  button {
-    margin-top: 16px;
-    border-radius: 5px;
-    padding: 5px;
-  }
-`;
-
-const ButtonInLine = styled.button`
-  padding: 5px;
-  margin: 0;
-  color: inherit;
-  background-color: inherit;
-  font-family: inherit;
-  border: none;
-  text-decoration: underline;
-  font-size: inherit;
-  font-weight: inherits;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
+import { SubmitButton } from "./Button";
 
 const Recommend = ({ setRecommendations }) => {
   const [nameOfPlace, setNameOfPlace] = useState("");
@@ -77,7 +39,7 @@ const Recommend = ({ setRecommendations }) => {
         <p>
           Do you want to submit another recommendation?
           <span>
-            <ButtonInLine onClick={() => setDidSubmit(!didSubmit)}>Let's go</ButtonInLine>
+            <button onClick={() => setDidSubmit(!didSubmit)}>Let's go</button>
           </span>
         </p>
       </>
@@ -86,7 +48,7 @@ const Recommend = ({ setRecommendations }) => {
   return (
     <>
       <h4>Fill in the following details</h4>
-      <Form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit}>
         <label htmlFor="nameOfPlace">Name of place</label>
         <input
           id="nameOfPlace"
@@ -122,10 +84,12 @@ const Recommend = ({ setRecommendations }) => {
           pattern="https://.*"
           required
         />
-        <button type="submit" disabled={!city || !nameOfPlace || !website || !comment}>
-          Submit
-        </button>
-      </Form>
+        <SubmitButton
+          inverted={true}
+          disabled={!city || !nameOfPlace || !website || !comment}
+          label={"Submit"}
+        />
+      </form>
     </>
   );
 };

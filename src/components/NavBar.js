@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { profileCircleIcon } from "../assets/icons";
 import styled from "styled-components";
 
-const Hamburger = styled.button`
+const Hamburger = styled.button(({ theme, isOpen }) =>`
   display: flex;
   justify-self: flex-end;
   flex-direction: column;
@@ -14,40 +14,40 @@ const Hamburger = styled.button`
   border: none;
   padding: 0;
   z-index: 10;
-  position: ${({ isOpen }) => (isOpen ? "fixed" : "null")};
-  right: ${({ isOpen }) => (isOpen ? "20px" : "null")};
+  position: ${isOpen ? "fixed" : "null"};
+  right: ${isOpen ? "20px" : "null"};
 
   div {
     width: 32px;
     height: 4px;
-    background: ${({ isOpen }) => (isOpen ? "white" : "rgb(0,50,50)")};
+    background: ${isOpen ? theme.colors.backgroundSecondary : theme.colors.backgroundPrimary};
     border-radius: 10px;
     transition: all 0.2s linear;
     position: relative;
     transform-origin: 1px;
 
     :first-child {
-      transform: ${({ isOpen }) => (isOpen ? "rotate(45deg)" : "rotate(0)")};
+      transform: ${isOpen ? "rotate(45deg)" : "rotate(0)"};
     }
 
     :nth-child(2) {
-      opacity: ${({ isOpen }) => (isOpen ? "0" : "1")};
-      transform: ${({ isOpen }) => (isOpen ? "translateX(20px)" : "translateX(0)")};
+      opacity: ${isOpen ? "0" : "1"};
+      transform: ${isOpen ? "translateX(20px)" : "translateX(0)"};
     }
 
     :nth-child(3) {
-      transform: ${({ isOpen }) => (isOpen ? "rotate(-45deg)" : "rotate(0)")};
+      transform: ${isOpen ? "rotate(-45deg)" : "rotate(0)"};
     }
   }
-`;
+`);
 
-const Menu = styled.nav`
+const Menu = styled.nav(({ theme, isOpen }) => `
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   color: white;
-  background: rgb(0, 50, 50);
-  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(-100%)")};
+  background: ${theme.colors.backgroundPrimary};
+  transform: ${isOpen ? "translateX(0)" : "translateX(-100%)"};
   position: fixed;
   top: 0;
   right: 0;
@@ -61,9 +61,9 @@ const Menu = styled.nav`
     color: inherit;
     font-size: 22px;
     margin: 10px 0;
-    text-decoration: none;
   }
-`;
+`
+);
 
 export const NavMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,7 +88,7 @@ export const NavMobile = () => {
   );
 };
 
-const Navbar = styled.nav`
+const Navbar = styled.nav(({ theme }) =>`
   display: flex;
   justify-content: flex-end;
   gap: 20px;
@@ -96,8 +96,7 @@ const Navbar = styled.nav`
   a {
     font-size: 18px;
     letter-spacing: -0.3px;
-    color: rgb(0, 50, 50);
-    text-decoration: none;
+    color: ${theme.colors.primary};
 
     @media (min-width: 768px) {
       &:hover {
@@ -105,7 +104,7 @@ const Navbar = styled.nav`
       }
     }
   }
-`;
+`);
 
 export const NavDesktop = () => {
   return (

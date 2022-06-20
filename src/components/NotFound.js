@@ -1,7 +1,8 @@
 import React from "react";
+import { notFoundIcon } from "../assets/icons";
 
 const NotFound = () => {
-  return <h2>Sorry, page not found.</h2>;
+  return <p>{notFoundIcon} Sorry, page not found.</p>;
 };
 
 export default NotFound;

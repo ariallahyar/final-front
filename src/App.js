@@ -6,29 +6,21 @@ import CommunityPage from "./components/CommunityPage";
 import SupperSocietyPage from "./components/SupperSocietyPage";
 import ProfilePage from "./components/ProfilePage";
 import NotFound from "./components/NotFound";
-import { createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "styled-components";
+import { base as defaultTheme } from "./themes";
+import { GlobalStyle } from "./globalStyles";
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 1800px;
-    box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-`;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  navigator.userAgent
+);
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+        <Route path="/" element={<Layout isMobile={isMobile} />}>
+          <Route index element={<Home isMobile={isMobile} />} />
           <Route path="community" element={<CommunityPage />} />
           <Route path="society" element={<SupperSocietyPage />} />
           <Route path="profile" element={<ProfilePage />} />
@@ -36,7 +28,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/404" replace />} /> */
         </Route>
       </Routes>
-    </>
+    </ThemeProvider>
   );
 };
 
