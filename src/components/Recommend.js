@@ -9,7 +9,7 @@ const Recommend = ({ setRecommendations }) => {
   const [city, setCity] = useState("");
   const [comment, setComment] = useState("");
   const [website, setWebsite] = useState("");
-  const [didSubmit, setDidSubmit] = useState(true);
+  const [didSubmit, setDidSubmit] = useState(false);
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("ID");

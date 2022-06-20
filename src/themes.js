@@ -20,6 +20,8 @@ export const base = {
     large: "20px",
   },
   fontFamily: {
-    primary: "Verdana, Geneva, Tahoma, sans-serif",
+    title: "Oswald, sans-serif",
+    primary: "Ubuntu, sans-serif",
+    bodyText: "Open sans, sans-serif",
   },
 };

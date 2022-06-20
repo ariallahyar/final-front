@@ -3,23 +3,31 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle(
   ({ theme }) => `
   * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: ${theme.fontFamily.bodyText}
   }
 
   body {
     margin: 0 auto;
-    padding: 20px;
     max-width: 1800px;
-    font-family: ${theme.fontFamily.primary};
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  main, header {
+    padding: 0 20px;
   }
 
   h1, h2, h3, h4, p, a, button {
     margin: 0;
   }
-  
+
+  h2, h3, h4 {
+    font-family: ${theme.fontFamily.primary};
+    font-weight: 500;
+  }
+
   a {
     color: inherit;
     text-decoration: none;

@@ -4,25 +4,39 @@ import { subscribe } from "../api/subscriber";
 import { utensilsIcon, boltIcon, awardIcon } from "../assets/icons";
 import { SubmitButton } from "./Button";
 
-const Section = styled.section(({ theme }) => `
+const Section = styled.section(
+  ({ theme }) => `
   color: ${theme.colors.primary};
   max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-
-  h2 {
-    margin-top: 20px;
+  margin: 36px auto 60px auto;
+  display: flex;
+  flex-direction: column;
+  
+  h2, i {
+    align-self: center;
+    font-weight: 700;
+    font-size: 32px;
+    font-family: ${theme.fontFamily.title};
     text-transform: uppercase;
   }
 
   h3 {
-    font-size: 16px;
+    font-size: ${theme.fontSizes.large};
     letter-spacing: -0.5px;
     margin: 20px 0 5px 0;
   }
 
   p {
     text-align: left;
+  }
+
+  form {
+    align-self: center;
+    text-align: center;
+
+    h3 {
+      font-weight: bolder;
+    }
   }
 `
 );
@@ -45,7 +59,8 @@ const SupperSocietyPage = () => {
 
   return (
     <Section>
-      <h2>{utensilsIcon} Supper Society</h2>
+      <i>{utensilsIcon}</i>
+      <h2>Supper Society</h2>
       <h3>Why join Supper Society?</h3>
       <p>
         Supper Society brings people together to share their love of food by arranging dining

@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { profileCircleIcon } from "../assets/icons";
 import styled from "styled-components";
 
-const Hamburger = styled.button(({ theme, isOpen }) =>`
+const Hamburger = styled.button(
+  ({ theme, isOpen }) => `
   display: flex;
-  justify-self: flex-end;
   flex-direction: column;
   justify-content: space-around;
   width: 32px;
-  height: 32px;
+  height: 36px;
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 0 0 6px 0;
   z-index: 10;
   position: ${isOpen ? "fixed" : "null"};
   right: ${isOpen ? "20px" : "null"};
 
   div {
     width: 32px;
-    height: 4px;
-    background: ${isOpen ? theme.colors.backgroundSecondary : theme.colors.backgroundPrimary};
-    border-radius: 10px;
+    height: 3px;
+    background: ${isOpen ? theme.colors.backgroundSecondary : theme.colors.backgroundSecondary};
+    border-radius: 1.5px;
     transition: all 0.2s linear;
     position: relative;
     transform-origin: 1px;
@@ -39,9 +38,11 @@ const Hamburger = styled.button(({ theme, isOpen }) =>`
       transform: ${isOpen ? "rotate(-45deg)" : "rotate(0)"};
     }
   }
-`);
+`
+);
 
-const Menu = styled.nav(({ theme, isOpen }) => `
+const Menu = styled.li(
+  ({ theme, isOpen }) => `
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -58,19 +59,18 @@ const Menu = styled.nav(({ theme, isOpen }) => `
   height: 100vh;
 
   a {
-    color: inherit;
-    font-size: 22px;
+    font-size: ${theme.fontSizes.large};
     margin: 10px 0;
   }
 `
 );
 
-export const NavMobile = () => {
+export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <>
+    <nav>
       <Hamburger isOpen={isOpen} onClick={toggle}>
         <div></div>
         <div></div>
@@ -78,41 +78,12 @@ export const NavMobile = () => {
       </Hamburger>
       {isOpen && (
         <Menu isOpen={isOpen} onClick={toggle}>
-          <Link to="/">Home</Link>
+          <Link to="/">Discover</Link>
           <Link to="/community">Community</Link>
           <Link to="/society">Supper Society</Link>
           <Link to="/profile">Profile</Link>
         </Menu>
       )}
-    </>
-  );
-};
-
-const Navbar = styled.nav(({ theme }) =>`
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
-
-  a {
-    font-size: 18px;
-    letter-spacing: -0.3px;
-    color: ${theme.colors.primary};
-
-    @media (min-width: 768px) {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-`);
-
-export const NavDesktop = () => {
-  return (
-    <Navbar>
-      <Link to="/">Home</Link>
-      <Link to="/community">Community</Link>
-      <Link to="/society">Supper Society</Link>
-      <Link to="/profile">{profileCircleIcon}</Link>
-    </Navbar>
+    </nav>
   );
 };
