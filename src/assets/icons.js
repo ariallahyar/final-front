@@ -8,7 +8,9 @@ import {
   faUtensils,
   faBolt,
   faStar,
-  faCircleExclamation
+  faCircleExclamation,
+  faCity,
+  faThumbTack
 } from "@fortawesome/free-solid-svg-icons";
 
 export const addressIcon = <FontAwesomeIcon icon={faLocationDot} />;
@@ -20,3 +22,5 @@ export const utensilsIcon = <FontAwesomeIcon icon={faUtensils} />;
 export const boltIcon = <FontAwesomeIcon icon={faBolt} />;
 export const starIcon = <FontAwesomeIcon icon={faStar} />;
 export const notFoundIcon = <FontAwesomeIcon icon={faCircleExclamation} />;
+export const cityIcon = <FontAwesomeIcon icon={faCity} />;
+export const thumbtackIcon = <FontAwesomeIcon icon={faThumbTack} />;

@@ -1,17 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button(({ theme, inverted }) => `
-  color: ${inverted ? theme.colors.buttonTextInverted : theme.colors.buttonText};
-  border: 1px solid ${theme.colors.buttonText};
+const StyledButton = styled.button(
+  ({ theme, dark }) => `
+  color: ${dark ? theme.colors.btnDarkText : theme.colors.btnLightText};
+  border: 2px solid ${dark ? theme.colors.btnDarkBorder : theme.colors.btnLightBorder};
   padding: 3px 10px;
-  background-color: ${
-    inverted ? theme.colors.buttonBackgroundInverted : theme.colors.buttonBackground
-  };
+  background-color: ${dark ? theme.colors.btnDarkFill : theme.colors.btnLightFill};
   text-decoration: none;
 
   &:enabled:hover {
-    background-color: ${theme.colors.buttonBackgroundHover};
+    color: ${dark ? theme.colors.btnLightText : theme.colors.btnLightText};
+    background-color: ${dark ? theme.colors.btnLightFill : theme.colors.btnLightFill};
+    border: 2px solid ${theme.colors.btnDarkBorder};
+    font-weight: bold;
   }
 
   &:disabled {
@@ -20,9 +22,9 @@ const StyledButton = styled.button(({ theme, inverted }) => `
 `
 );
 
-export const SubmitButton = ({ inverted, disabled, label }) => {
+export const SubmitButton = ({ dark, disabled, label }) => {
   return (
-    <StyledButton inverted={inverted} type="submit" disabled={disabled}>
+    <StyledButton dark={dark} type="submit" disabled={disabled}>
       {label}
     </StyledButton>
   );

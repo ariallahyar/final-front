@@ -1,36 +1,41 @@
 import React, { useEffect, useState } from "react";
-import Recommend from "./Recommend";
+import RecommendationForm from "./RecommendationForm";
 import Login from "./Login";
 import { getRecommendations } from "../api/recommendation";
+import RecommendationCard from "./RecommendationCard";
 import styled from "styled-components";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
 
-  section {
-    margin-bottom: 30px;
+  h2 {
+    margin-bottom: 20px;
   }
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
-
-    section {
-      height: 88vh;
-      margin-bottom: 0;
-      overflow-x: scroll;
-    }
   }
 `;
 
-const FormContainer = styled.section(({ theme }) => `
-  color: white;
-  background-color: ${theme.colors.primary};
+const Recommendations = styled.section(
+  ({ theme }) => `
+  @media (min-width: 768px) {
+    height: 88vh;
+    margin: 0 20px 0 0;
+    overflow-x: scroll;
+  }
+`
+);
+
+const FormContainer = styled.section(
+  ({ theme }) => `
+  background-color: ${theme.colors.backgroundLight};
   padding: 20px;
 `
 );
 
-const CommunityPage = () => {
+const RecommendationsPage = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
 
@@ -38,26 +43,29 @@ const CommunityPage = () => {
 
   return (
     <Container>
-      <section>
+      <Recommendations>
         <h2>Community favorites</h2>
+        <p>
+          Here is a bit of text explaining what this is all about. Hope you find it interesting.
+          I'll just add some more text to see the line break.
+        </p>
         {recommendations.map(({ nameOfPlace, city, comment, website, _id }) => {
           return (
-            <article key={_id}>
-              <h4>{nameOfPlace}</h4>
-              <p>{city}</p>
-              <p>{comment}</p>
-              <a href={website} target={"_blank"} rel="noreferrer">
-                {website}
-              </a>
-            </article>
+            <RecommendationCard
+              _id={_id}
+              nameOfPlace={nameOfPlace}
+              city={city}
+              website={website}
+              comment={comment}
+            />
           );
         })}
-      </section>
+      </Recommendations>
       <FormContainer>
         {authorized ? (
           <>
             <h3>Submit a recommendation</h3>
-            <Recommend authorized={authorized} setRecommendations={setRecommendations} />
+            <RecommendationForm authorized={authorized} setRecommendations={setRecommendations} />
           </>
         ) : (
           <>
@@ -70,4 +78,4 @@ const CommunityPage = () => {
   );
 };
 
-export default CommunityPage;
+export default RecommendationsPage;

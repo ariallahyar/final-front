@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 const Section = styled.section(({ theme }) => `
   overflow-x: scroll;
-  color: white;
-  background-color: ${theme.colors.primary};
-  border-bottom: solid 20px ${theme.colors.primary};
+  color: ${theme.colors.primary};
+  background-color: ${theme.colors.backgroundLight};
+  border-bottom: solid 20px ${theme.colors.backgroundLight};
   padding: 20px;
 `
 );

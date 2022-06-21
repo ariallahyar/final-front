@@ -6,12 +6,13 @@ const Hamburger = styled.button(
   ({ theme, isOpen }) => `
   display: flex;
   flex-direction: column;
+  gap: 5px;
   justify-content: space-around;
   width: 32px;
-  height: 36px;
+  height: 38px;
   background: transparent;
   border: none;
-  padding: 0 0 6px 0;
+  padding: 0 0 12px 0;
   z-index: 10;
   position: ${isOpen ? "fixed" : "null"};
   right: ${isOpen ? "20px" : "null"};
@@ -19,7 +20,7 @@ const Hamburger = styled.button(
   div {
     width: 32px;
     height: 3px;
-    background: ${isOpen ? theme.colors.backgroundSecondary : theme.colors.backgroundSecondary};
+    background: white;
     border-radius: 1.5px;
     transition: all 0.2s linear;
     position: relative;
@@ -46,8 +47,8 @@ const Menu = styled.li(
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  color: white;
-  background: ${theme.colors.backgroundPrimary};
+  color: ${theme.colors.textLight};
+  background: ${theme.colors.backgroundDark};
   transform: ${isOpen ? "translateX(0)" : "translateX(-100%)"};
   position: fixed;
   top: 0;

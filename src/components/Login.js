@@ -79,7 +79,11 @@ const Login = ({ setAuthorized }) => {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <SubmitButton disabled={!password || !email} label={isRegistered ? "Log In" : "Sign Up"} />
+        <SubmitButton
+          dark
+          disabled={!password || !email}
+          label={isRegistered ? "Log In" : "Sign Up"}
+        />
       </form>
       <p>
         {isRegistered ? "Don't" : "Already"} have an account?{" "}

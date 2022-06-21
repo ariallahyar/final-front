@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
-import CommunityPage from "./components/CommunityPage";
+import RecommendationsPage from "./components/RecommendationPage";
 import SupperSocietyPage from "./components/SupperSocietyPage";
 import ProfilePage from "./components/ProfilePage";
 import NotFound from "./components/NotFound";
@@ -21,7 +21,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout isMobile={isMobile} />}>
           <Route index element={<Home isMobile={isMobile} />} />
-          <Route path="community" element={<CommunityPage />} />
+          <Route path="community" element={<RecommendationsPage />} />
           <Route path="society" element={<SupperSocietyPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="404" element={<NotFound />} />

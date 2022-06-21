@@ -92,7 +92,7 @@ const SupperSocietyPage = () => {
               placeholder="example@test.com"
               required
             />
-            <SubmitButton disabled={!email} label="Subscribe" />
+            <SubmitButton dark disabled={!email} label="Subscribe" />
           </div>
         </form>
       )}

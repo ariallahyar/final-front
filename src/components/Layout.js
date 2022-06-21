@@ -10,9 +10,11 @@ const DesktopHeader = styled.header(
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  background-color: ${theme.colors.backgroundDark};
 
   h1 {
     font-family: ${theme.fontFamily.title};
+    color: ${theme.colors.textLight};
     letter-spacing: -1.0px;
     font-weight: 400;
   }
@@ -26,7 +28,7 @@ const DesktopHeader = styled.header(
   }
 
   a {
-    color: ${theme.colors.primary};
+    color: ${theme.colors.textLight};
     font-family: ${theme.fontFamily.primary};
     font-size: ${theme.fontSizes.default};
     font-weight: 500;
@@ -38,8 +40,8 @@ const DesktopHeader = styled.header(
 
 const MobileHeader = styled.header(
   ({ theme }) => `
-  color: white;
-  background-color: ${theme.colors.primary};
+  color: ${theme.colors.textLight};
+  background-color: ${theme.colors.backgroundDark};
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -47,12 +49,18 @@ const MobileHeader = styled.header(
   height: 60px;
   
   h1 {
+    color: ${theme.colors.textLight};
     font-family: ${theme.fontFamily.title};
   }
 
   nav {
     display: flex;
     justify-content: flex-end;
+  }
+
+  a {
+    color: ${theme.colors.textLight};
+    font-family: ${theme.fontFamily.primary};
   }
   `
 );

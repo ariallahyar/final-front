@@ -4,7 +4,7 @@ import { sendRecommendation } from "../api/recommendation";
 import { starIcon } from "../assets/icons";
 import { SubmitButton } from "./Button";
 
-const Recommend = ({ setRecommendations }) => {
+const RecommendationForm = ({ setRecommendations }) => {
   const [nameOfPlace, setNameOfPlace] = useState("");
   const [city, setCity] = useState("");
   const [comment, setComment] = useState("");
@@ -85,7 +85,7 @@ const Recommend = ({ setRecommendations }) => {
           required
         />
         <SubmitButton
-          inverted={true}
+          dark
           disabled={!city || !nameOfPlace || !website || !comment}
           label={"Submit"}
         />
@@ -94,4 +94,4 @@ const Recommend = ({ setRecommendations }) => {
   );
 };
 
-export default Recommend;
+export default RecommendationForm;
