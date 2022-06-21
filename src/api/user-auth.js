@@ -40,7 +40,11 @@ export const login = (email, password, error, callback) => {
 export const logout = (callback) => {
   fetch(`${API_URL}/user/auth`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json", Token: localStorage.getItem("Token") },
+    headers: {
+      "Content-Type": "application/json",
+      Token: localStorage.getItem("Token"),
+      UserId: localStorage.getItem("ID"),
+    },
   })
     .then((response) => {
       if (response.ok) return response.json();
@@ -55,12 +59,13 @@ export const logout = (callback) => {
 };
 
 export const deleteAccount = (callback) => {
-  const id = localStorage.getItem("ID");
-
   fetch(`${API_URL}/user/`, {
     method: "DELETE",
-    body: JSON.stringify({ _id: id }),
-    headers: { "Content-Type": "application/json", Token: localStorage.getItem("Token") },
+    headers: {
+      "Content-Type": "application/json",
+      Token: localStorage.getItem("Token"),
+      UserId: localStorage.getItem("ID"),
+    },
   })
     .then((response) => {
       if (response.ok) return response.json();

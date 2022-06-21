@@ -49,14 +49,18 @@ const RecommendationsPage = () => {
           Here is a bit of text explaining what this is all about. Hope you find it interesting.
           I'll just add some more text to see the line break.
         </p>
-        {recommendations.map(({ nameOfPlace, city, comment, website, _id }) => {
+        {recommendations.map(({ nameOfPlace, city, comment, website, _id, user_id }) => {
           return (
             <RecommendationCard
-              _id={_id}
+              key={_id}
+              id={_id}
+              userId={user_id}
               nameOfPlace={nameOfPlace}
               city={city}
               website={website}
               comment={comment}
+              recommendations={recommendations}
+              setRecommendations={setRecommendations}
             />
           );
         })}

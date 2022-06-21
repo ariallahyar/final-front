@@ -12,7 +12,6 @@ const RecommendationForm = ({ setRecommendations }) => {
   const [didSubmit, setDidSubmit] = useState(false);
 
   const token = localStorage.getItem("Token");
-  const user_id = localStorage.getItem("ID");
 
   const resetForm = () => {
     setNameOfPlace("");
@@ -23,7 +22,7 @@ const RecommendationForm = ({ setRecommendations }) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    sendRecommendation(user_id, city, nameOfPlace, comment, website, (newRec) =>
+    sendRecommendation(city, nameOfPlace, comment, website, (newRec) =>
       setRecommendations((previousRecs) => [newRec, ...previousRecs])
     );
     resetForm();
