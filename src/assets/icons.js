@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
   faHome,
-  faCircleUser,
   faUser,
   faRocket,
   faUtensils,
@@ -10,7 +9,7 @@ import {
   faStar,
   faCircleExclamation,
   faCity,
-  faTrashCan,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const addressIcon = <FontAwesomeIcon icon={faLocationDot} />;
@@ -22,4 +21,4 @@ export const boltIcon = <FontAwesomeIcon icon={faBolt} />;
 export const starIcon = <FontAwesomeIcon icon={faStar} />;
 export const notFoundIcon = <FontAwesomeIcon icon={faCircleExclamation} />;
 export const cityIcon = <FontAwesomeIcon icon={faCity} />;
-export const trashIcon = <FontAwesomeIcon icon={faTrashCan} />;
+export const trashIcon = <FontAwesomeIcon icon={faTrash} />;
