@@ -10,9 +10,11 @@ const DesktopHeader = styled.header(
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  height: 56px;
   background-color: ${theme.colors.backgroundDark};
 
   h1 {
+    padding-top: 2px;
     font-family: ${theme.fontFamily.title};
     color: ${theme.colors.textLight};
     letter-spacing: -1.0px;
@@ -25,6 +27,7 @@ const DesktopHeader = styled.header(
     justify-content: flex-end;
     align-items: flex-end;
     gap: 20px;
+    padding-bottom: 6.5px;
   }
 
   a {
