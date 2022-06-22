@@ -9,6 +9,10 @@ const Place = styled.article(
 
   h2 {
     margin-bottom: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   span {

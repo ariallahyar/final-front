@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Map from "./Map";
 import Places from "./Places";
-// import { getPlaces } from "../api/place";
+import { getPlaces } from "../api/place";
 import styled from "styled-components";
 
 // development
-import data from "../mock-data.json";
+// import data from "../mock-data.json";
 
 const Container = styled.div`
   display: grid;
@@ -22,7 +22,8 @@ const Container = styled.div`
   }
 `;
 
-const SelectCityOverlay = styled.select(({ theme }) => `
+const SelectCityOverlay = styled.select(
+  ({ theme }) => `
   bottom: 20px;
   left: 12px;
   position: absolute;
@@ -45,21 +46,21 @@ const SelectCityOverlay = styled.select(({ theme }) => `
 `
 );
 
-const options = ["Copenhagen", "Seattle"];
+const options = ["Copenhagen", "Seattle", "Stockholm"];
 
 const Home = ({ isMobile }) => {
   const [activeMarker, setActiveMarker] = useState(null);
   const [city, setCity] = useState("Copenhagen");
-  // const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
-  // useEffect(() => getPlaces(city, (data) => setMarkers(data)), [city]);
+  useEffect(() => getPlaces(city, (data) => setMarkers(data)), [city]);
 
   // development
-  const [markers, setMarkers] = useState(data.results.filter((result) => result.city === city));
+  // const [markers, setMarkers] = useState(data.results.filter((result) => result.city === city));
 
-  useEffect(() => {
-    setMarkers(() => data.results.filter((result) => result.city === city));
-  }, [city]);
+  // useEffect(() => {
+  //   setMarkers(() => data.results.filter((result) => result.city === city));
+  // }, [city]);
 
   return (
     <>
