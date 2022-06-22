@@ -63,10 +63,13 @@ const RecommendationCard = ({
 }) => {
   const isUsersOwnRecommendation = userId === localStorage.getItem("ID");
 
-  const handleOnDelete = () => {
-    deleteRecommendation(id, (deleted) =>
-      setRecommendations(([deleted, ...recommendations]) => recommendations)
-    );
+  const confirmToDelete = () => {
+    const confirmBox = window.confirm("Are you sure you want to delete your recommendation?");
+    if (confirmBox === true) {
+      deleteRecommendation(id, (deleted) =>
+        setRecommendations(([deleted, ...recommendations]) => recommendations)
+      );
+    }
   };
 
   return (
@@ -83,7 +86,7 @@ const RecommendationCard = ({
         </Grid>
         <Details>{comment}</Details>
       </div>
-      {isUsersOwnRecommendation && <button onClick={handleOnDelete}>{trashIcon}</button>}
+      {isUsersOwnRecommendation && <button onClick={confirmToDelete}>{trashIcon}</button>}
     </Article>
   );
 };

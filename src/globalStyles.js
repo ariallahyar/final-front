@@ -41,7 +41,6 @@ export const GlobalStyle = createGlobalStyle(
   form, article {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
   }
 
   label {

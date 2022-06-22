@@ -1,20 +1,38 @@
 import React, { useState } from "react";
-import { profileIcon } from "../assets/icons";
+import { Link } from "react-router-dom";
 import Login from "./Login";
 import { logout, deleteAccount } from "../api/user-auth";
 import { SubmitButton } from "./Button";
 import styled from "styled-components";
 
 const Container = styled.section`
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+
+  h2 {
+    align-self: center;
+    margin-bottom: 20px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+`;
+
+const DeleteButton = styled.button`
+  color: red;
 `;
 
 const ProfilePage = () => {
-  const [authorized, setAuthorized] = useState(localStorage.getItem("Token")); 
+  const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
 
-  const deleteOnSubmit = (event) => {
-    event.preventDefault();
-    deleteAccount(() => setAuthorized(localStorage.getItem("Token")));
+  const confirmToDelete = () => {
+    const confirmBox = window.confirm("Do you really want to delete your account?");
+    if (confirmBox === true) {
+      deleteAccount(() => setAuthorized(localStorage.getItem("Token")));
+    }
   };
 
   const logoutOnSubmit = (event) => {
@@ -31,13 +49,15 @@ const ProfilePage = () => {
 
   return (
     <Container>
-      <h2>{profileIcon} Welcome to your profile page</h2>
+      <h2>Welcome to your profile page</h2>
+      <p>
+        Check out our <Link to="/community">Community</Link> page to submit your own recommendation!
+        This profile page will be further developed along with <Link to="/society">Supper Society</Link>.
+      </p>
       <form onSubmit={logoutOnSubmit}>
         <SubmitButton dark label="Log Out" />
       </form>
-      <form onSubmit={deleteOnSubmit}>
-        <SubmitButton label="Delete Account" />
-      </form>
+      <DeleteButton onClick={confirmToDelete}>Delete Account</DeleteButton>
     </Container>
   );
 };

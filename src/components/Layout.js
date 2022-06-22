@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SideMenu } from "./SideMenu";
-import { profileCircleIcon } from "../assets/icons";
+import { profileIcon } from "../assets/icons";
 import styled from "styled-components";
 
 const DesktopHeader = styled.header(
@@ -96,7 +96,7 @@ const Layout = ({ isMobile }) => {
             <Link to="/">Home</Link>
             <Link to="/community">Community</Link>
             <Link to="/society">Supper Society</Link>
-            <Link to="/profile">{profileCircleIcon}</Link>
+            <Link to="/profile">{profileIcon}</Link>
           </nav>
         </DesktopHeader>
       )}
