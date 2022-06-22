@@ -80,7 +80,6 @@ const RecommendationForm = ({ setRecommendations }) => {
           value={website}
           onChange={(event) => setWebsite(event.target.value)}
           placeholder="https://example.com"
-          pattern="https://.*"
           required
         />
         <SubmitButton

@@ -17,12 +17,19 @@ const Container = styled.section`
   }
 
   a {
+    font-weight: 500;
     text-decoration: underline;
   }
 `;
 
 const DeleteButton = styled.button`
-  color: red;
+  color: grey;
+  text-decoration: none;
+
+  &:hover {
+    font-weight: 600;
+    color: rgb(255, 0, 0, 0.8);
+  }
 `;
 
 const ProfilePage = () => {
@@ -52,7 +59,8 @@ const ProfilePage = () => {
       <h2>Welcome to your profile page</h2>
       <p>
         Check out our <Link to="/community">Community</Link> page to submit your own recommendation!
-        This profile page will be further developed along with <Link to="/society">Supper Society</Link>.
+        This profile page will be further developed along with{" "}
+        <Link to="/society">Supper Society</Link>.
       </p>
       <form onSubmit={logoutOnSubmit}>
         <SubmitButton dark label="Log Out" />

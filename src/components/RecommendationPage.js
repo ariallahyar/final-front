@@ -22,7 +22,7 @@ const Recommendations = styled.section(
   ({ theme }) => `
   @media (min-width: 768px) {
     height: 88vh;
-    margin: 0 20px 0 0;
+    padding: 0 20px 0 0;
     overflow-x: scroll;
   }
 `

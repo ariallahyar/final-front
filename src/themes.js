@@ -20,8 +20,8 @@ export const base = {
     tiny: "12px",
     small: "14px",
     default: "16px",
-    large: "20px",
-    xlarge: "24px",
+    large: "22px",
+    xlarge: "26px",
   },
   fontFamily: {
     title: "Oswald, sans-serif",

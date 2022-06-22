@@ -6,12 +6,12 @@ import styled from "styled-components";
 const Article = styled.article(
   ({ theme }) => `
   margin: 20px 0;
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: 5px;
   display: grid;
   grid-template-columns: 1fr 28px;
-  border: 3px solid ${theme.colors.backgroundLight};
-  // box-shadow: 6px 6px  ${theme.colors.backgroundLight};
+  border: 1px solid ${theme.colors.backgroundLight};
+  box-shadow: 0 2px 6px 0px  ${theme.colors.backgroundLight};
   
   h3 {
     color: ${theme.colors.secondary};
@@ -22,7 +22,7 @@ const Article = styled.article(
   }
   
   button {
-    color: rgb(255, 0, 0, 0.4);
+    color: silver;
     font-size: ${theme.fontSizes.default};
     align-self: flex-start;
     

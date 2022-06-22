@@ -58,6 +58,10 @@ export const GlobalStyle = createGlobalStyle(
     font: inherit;
     border-radius: 3px;
   }
+  
+  textarea {
+    resize: vertical;
+  }
 
   button {
     margin-top: 16px;

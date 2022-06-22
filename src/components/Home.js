@@ -28,7 +28,7 @@ const SelectCityOverlay = styled.select(
   left: 12px;
   position: absolute;
   z-index: 2;
-  width: 130px;
+  width: 140px;
   padding: 2px 4px;
   color: rgb(102, 102, 102);
   background-color: white;
@@ -41,7 +41,7 @@ const SelectCityOverlay = styled.select(
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  font-size: ${theme.fontSizes.small};
+  font-size: ${theme.fontSizes.default};
   font-weight: 600;
 `
 );

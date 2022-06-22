@@ -14,7 +14,7 @@ const Section = styled.section(({ theme }) => `
 const Places = ({ places, activeMarker, setActiveMarker }) => {
   return (
     <Section>
-      {places.map((place) => {
+      {places?.map((place) => {
         return (
           <PlaceCard
             key={place.place_id}

@@ -5,7 +5,8 @@ import styled from "styled-components";
 
 const Place = styled.article(
   ({ theme }) => `
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  border-bottom: 0.8px solid silver;
 
   h2 {
     margin-bottom: 5px;
@@ -23,9 +24,13 @@ const Place = styled.article(
   p {
     margin: 10px 0;
   }
-
+  
   a {
     font-size: ${theme.fontSizes.small};
+  }
+  
+  img {
+    padding-bottom: 20px;
   }
 `
 );

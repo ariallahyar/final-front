@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Hamburger = styled.button(
@@ -79,10 +79,10 @@ export const SideMenu = () => {
       </Hamburger>
       {isOpen && (
         <Menu isOpen={isOpen} onClick={toggle}>
-          <Link to="/">Discover</Link>
-          <Link to="/community">Community</Link>
-          <Link to="/society">Supper Society</Link>
-          <Link to="/profile">Profile</Link>
+          <NavLink to="/">Discover</NavLink>
+          <NavLink to="/community">Community</NavLink>
+          <NavLink to="/society">Supper Society</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
         </Menu>
       )}
     </nav>

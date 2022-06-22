@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { SideMenu } from "./SideMenu";
 import { profileIcon } from "../assets/icons";
 import styled from "styled-components";
@@ -25,11 +25,14 @@ const DesktopHeader = styled.header(
     box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
-    gap: 20px;
-    padding-bottom: 6.5px;
-  }
+    align-items: center;
+    gap: 28px;
 
+    .active{
+      color: ${theme.colors.secondary};
+    }
+  } 
+  
   a {
     color: ${theme.colors.textLight};
     font-family: ${theme.fontFamily.primary};
@@ -37,6 +40,12 @@ const DesktopHeader = styled.header(
     font-weight: 500;
     letter-spacing: -0.3px;
     padding-bottom: 2px;
+    
+    &:hover {
+      text-decoration: none;
+      padding-top: 2px;
+      border-bottom: 2px solid ${theme.colors.secondary};
+    }
   }
 `
 );
@@ -59,6 +68,10 @@ const MobileHeader = styled.header(
   nav {
     display: flex;
     justify-content: flex-end;
+
+    .active {
+      color: ${theme.colors.secondary};
+    }
   }
 
   a {
@@ -96,10 +109,18 @@ const Layout = ({ isMobile }) => {
         <DesktopHeader>
           <h1>FAVOREATS</h1>
           <nav>
-            <Link to="/">Home</Link>
-            <Link to="/community">Community</Link>
-            <Link to="/society">Supper Society</Link>
-            <Link to="/profile">{profileIcon}</Link>
+            <NavLink
+              to="/"
+              activeStyle={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+            >
+              Home
+            </NavLink>
+            <NavLink to="/community">Community</NavLink>
+            <NavLink to="/society">Supper Society</NavLink>
+            <NavLink to="/profile">{profileIcon}</NavLink>
           </nav>
         </DesktopHeader>
       )}
