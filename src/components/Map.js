@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState, useEffect } from "react";
+import React, { memo, useMemo, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 import { websiteIcon, addressIcon } from "../assets/icons";
 import styled from "styled-components";
@@ -27,6 +27,15 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
       map.fitBounds(bounds);
     }
   }, [map, markers]);
+
+  const options = useMemo(
+    () => ({
+      mapId: "1d387d12bfc69874",
+      disableDefaultUi: true,
+      clickableIcons: false,
+    }),
+    []
+  );
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -62,6 +71,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
   return (
     <GoogleMap
       onLoad={onLoad}
+      options={options}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
