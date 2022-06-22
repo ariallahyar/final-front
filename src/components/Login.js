@@ -12,7 +12,13 @@ const Login = ({ setAuthorized }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorBadCredentials, setErrorBadCredentials] = useState(false);
+  const [errorEmailExists, setErrorEmailExists] = useState(false);
+
+  const resetErrors = () => {
+    setErrorEmailExists(false);
+    setErrorBadCredentials(false);
+  };
 
   const resetForm = () => {
     setName("");
@@ -22,11 +28,12 @@ const Login = ({ setAuthorized }) => {
 
   const signUpOnSubmit = (event) => {
     event.preventDefault();
+    resetErrors();
     createAccount(
       name,
       email,
       password,
-      () => setErrorMessage(true),
+      () => setErrorEmailExists(true),
       () => {
         setIsRegistered(true);
         setAuthorized(true);
@@ -37,13 +44,19 @@ const Login = ({ setAuthorized }) => {
 
   const loginOnSubmit = (event) => {
     event.preventDefault();
+    resetErrors();
     login(
       email,
       password,
-      () => setErrorMessage(true),
+      () => setErrorBadCredentials(true),
       () => setAuthorized(true)
     );
     resetForm();
+  };
+
+  const onFormToggle = () => {
+    resetErrors();
+    setIsRegistered(isRegistered ? false : true);
   };
 
   return (
@@ -87,12 +100,11 @@ const Login = ({ setAuthorized }) => {
       </form>
       <p>
         {isRegistered ? "Don't" : "Already"} have an account?{" "}
-        <button onClick={() => setIsRegistered(isRegistered ? false : true)}>
-          {isRegistered ? "Sign Up" : "Log In"}
-        </button>
+        <button onClick={onFormToggle}>{isRegistered ? "Sign Up" : "Log In"}</button>
       </p>
 
-      {errorMessage && <Error>Email and password do not match</Error>}
+      {errorBadCredentials && <Error>Email and password do not match</Error>}
+      {errorEmailExists && <Error>Email already exists</Error>}
     </>
   );
 };
