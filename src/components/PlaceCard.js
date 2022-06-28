@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-// import { getPhoto } from "../api/place";
+import React, { useEffect, useRef, useState } from "react";
+import { getPhoto } from "../api/place";
 import { addressIcon, websiteIcon } from "../assets/icons";
 import styled from "styled-components";
 
@@ -49,13 +49,11 @@ const Grid = styled.div(
 );
 
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
-  const photoRef = place.photos[0].photo_reference;
-  const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
-  const image = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+  const [image, setImage] = useState(null);
 
-  // SERVER-SIDE CALL, NOT WORKING
-  // const [image, setImage] = useState(null);
-  // useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
+  const photoRef = place.photos[0].photo_reference;
+
+  useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
 
   const isActiveMarker = place.place_id === activeMarker;
   const placeRef = useRef(null);
