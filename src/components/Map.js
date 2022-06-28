@@ -1,6 +1,7 @@
 import React, { memo, useMemo, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 import { websiteIcon, addressIcon } from "../assets/icons";
+import { getPhoto } from "../api/place";
 import styled from "styled-components";
 import { base } from "../themes";
 
@@ -127,8 +128,9 @@ const StyledDetails = styled.div`
 `;
 
 const InfoWindowDetails = ({ name, website, url, description, photoRef }) => {
-  const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
-  const image = `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&maxwidth=400&key=${API_KEY}`;
+  const [image, setImage] = useState(null);
+
+  useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
 
   return (
     <StyledDetails>
