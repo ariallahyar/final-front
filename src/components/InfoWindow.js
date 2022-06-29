@@ -10,6 +10,7 @@ const StyledDetails = styled.article(
   border-bottom: 10px solid white;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 
   div {
     display: grid;
