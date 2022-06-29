@@ -42,14 +42,14 @@ const StyledDetails = styled.article(
   
   span {
     padding: 1px 4px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
     display: inline-block;
-    font-size: 9px;
     position: absolute;
     bottom: 0;
     right: 0;
     
     a {
+      font-size: 9px;
       color: white;
     }
   }

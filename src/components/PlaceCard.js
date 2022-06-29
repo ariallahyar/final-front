@@ -16,11 +16,6 @@ const Place = styled.article(
     }
   }
 
-  span {
-    font-size: ${theme.fontSizes.tiny};
-    color: ${theme.colors.secondary};
-  }
-
   p {
     margin: 10px 0;
   }
@@ -28,10 +23,35 @@ const Place = styled.article(
   a {
     font-size: ${theme.fontSizes.small};
   }
-  
-  img {
-    padding-bottom: 20px;
+
+  figure {
+    margin: 0;
+    position: relative;
+    margin-bottom: 20px
   }
+
+  img {
+    width: 100%;
+  }
+  
+  span {
+    background: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0px 4px;
+    font-size: ${theme.fontSizes.tiny};
+    
+    a {
+      color: white;
+      font-size: inherit;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
 `
 );
 
@@ -54,10 +74,10 @@ const Grid = styled.div(
 
 const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
   const [image, setImage] = useState(null);
-
+  const source = place.photos[0].html_attributions[0];
   const photoRef = place.photos[0].photo_reference;
 
-  useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
+  useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [place, photoRef]);
 
   const isActiveMarker = place.place_id === activeMarker;
   const placeRef = useRef(null);
@@ -88,7 +108,12 @@ const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
         </a>
       </Grid>
       <p>{place.description}</p>
-      <img src={image} alt={"restaurant"} />
+      <figure>
+        <img src={image} alt={place.name} />
+        <figcaption>
+          <span dangerouslySetInnerHTML={{ __html: source, disabled: true }} />
+        </figcaption>
+      </figure>
     </Place>
   );
 };

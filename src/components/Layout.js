@@ -111,7 +111,7 @@ const Layout = ({ isMobile }) => {
           <nav>
             <NavLink
               to="/"
-              activeStyle={{
+              activestyle={{
                 fontWeight: "bold",
                 color: "red",
               }}
