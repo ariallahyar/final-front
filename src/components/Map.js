@@ -1,19 +1,21 @@
 import React, { memo, useMemo, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
 import { websiteIcon, addressIcon } from "../assets/icons";
-import { getPhoto } from "../api/place";
 import styled from "styled-components";
 import { base } from "../themes";
 
-const markerColor = base.colors.secondary;
+const loadOptions = {
+  id: "google-map-script",
+  libraries: ["places"],
+  googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+};
 
 const mapContainerStyle = { width: "100%", height: "100%" };
 
+const markerColor = base.colors.secondary;
+
 const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
+  const { isLoaded, loadError } = useJsApiLoader(loadOptions);
 
   const [map, setMap] = useState(null);
 
@@ -29,7 +31,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     }
   }, [map, markers]);
 
-  const options = useMemo(
+  const mapOptions = useMemo(
     () => ({
       mapId: "1d387d12bfc69874",
       disableDefaultUi: true,
@@ -69,15 +71,18 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     anchor: new window.google.maps.Point(10, 20),
   };
 
+  if (loadError) return <div>Sorry, map cannot be loaded at this time.</div>;
+
   return (
     <GoogleMap
       onLoad={onLoad}
-      options={options}
+      options={mapOptions}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
       {markers?.map(({ place_id, url, website, name, photos, geometry, description }) => {
         const isSelected = activeMarker === place_id;
+
         return (
           <Marker
             key={place_id}
@@ -91,9 +96,10 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
               ) : (
                 <InfoWindow onCloseClick={() => setActiveMarker(null)}>
                   <InfoWindowDetails
+                    map={map}
                     name={name}
                     website={website}
-                    photoRef={photos[0].photo_reference}
+                    place_id={place_id}
                     url={url}
                     description={description}
                   />
@@ -127,10 +133,23 @@ const StyledDetails = styled.div`
   }
 `;
 
-const InfoWindowDetails = ({ name, website, url, description, photoRef }) => {
+const InfoWindowDetails = ({ map, place_id, name, website, url, description }) => {
   const [image, setImage] = useState(null);
+  const [source, setSource] = useState(null);
 
-  useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
+  const service = new window.google.maps.places.PlacesService(map);
+  service.getDetails(
+    {
+      placeId: place_id,
+      fields: ["photos"],
+    },
+    (results, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        setImage(results.photos[0].getUrl({ maxWidth: 300, maxHeight: 300 }));
+        setSource(results.photos[0].html_attributions[0]);
+      }
+    }
+  );
 
   return (
     <StyledDetails>
@@ -143,6 +162,9 @@ const InfoWindowDetails = ({ name, website, url, description, photoRef }) => {
       </a>
       <p>{description}</p>
       <img src={image} alt={"restaurant"} />
+      <p>
+        Source: <span dangerouslySetInnerHTML={{ __html: source }} />
+      </p>
     </StyledDetails>
   );
 };
