@@ -20,7 +20,7 @@ const StyledDetails = styled.article(
     p, a {
       padding: 0;
       margin: 0;
-      color: darkblue
+      color: #144786;
     }
     
     p { 

@@ -108,16 +108,13 @@ const Layout = ({ isMobile }) => {
       ) : (
         <DesktopHeader>
           <h1>FAVOREATS</h1>
-          <nav>
-            <NavLink
-              to="/"
-              activestyle={{
-                fontWeight: "bold",
-                color: "red",
-              }}
-            >
-              Home
-            </NavLink>
+          <nav
+            activestyle={{
+              fontWeight: "bold",
+              color: "red",
+            }}
+          >
+            <NavLink to="/">Home</NavLink>
             <NavLink to="/community">Community</NavLink>
             <NavLink to="/society">Supper Society</NavLink>
             <NavLink to="/profile">{profileIcon}</NavLink>

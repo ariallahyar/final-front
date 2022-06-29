@@ -79,7 +79,7 @@ export const SideMenu = () => {
       </Hamburger>
       {isOpen && (
         <Menu isOpen={isOpen} onClick={toggle}>
-          <NavLink to="/">Discover</NavLink>
+          <NavLink to="/">Home</NavLink>
           <NavLink to="/community">Community</NavLink>
           <NavLink to="/society">Supper Society</NavLink>
           <NavLink to="/profile">Profile</NavLink>
