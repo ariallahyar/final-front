@@ -43,7 +43,11 @@ const Grid = styled.div(
   p, a {
     padding: 0;
     margin: 0;
+  }
+  
+  p {
     font-size: ${theme.fontSizes.small};
+    text-align: center;
   }
 `
 );

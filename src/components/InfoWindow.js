@@ -7,27 +7,29 @@ const StyledDetails = styled.article(
   ({ theme }) => `
   width: 180px;
   max-height: 250px;
-  overflow-y: scroll;
-  padding: 0px 10px 0px 0px;
-  margin: 0;
   border-bottom: 10px solid white;
   display: flex;
   flex-direction: column;
 
   div {
     display: grid;
-    grid-template-columns: 28px 1fr;
-    margin: 8px 0;
+    grid-template-columns: 22px 1fr;
+    margin: 6px 0;
     
     p, a {
       padding: 0;
       margin: 0;
+      color: darkblue
     }
     
     p { 
       font-size: ${theme.fontSizes.small};
       text-align: center;
     }
+  }
+
+  p {
+    margin-bottom: 6px;
   }
 
   figure,
@@ -41,7 +43,7 @@ const StyledDetails = styled.article(
     padding: 1px 4px;
     background: rgba(0, 0, 0, 0.7);
     display: inline-block;
-    font-size: 8px;
+    font-size: 9px;
     position: absolute;
     bottom: 0;
     right: 0;
