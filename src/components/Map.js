@@ -57,7 +57,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     strokeColor: "white",
     rotation: 0,
     scale: 2,
-    anchor: new window.google.maps.Point(10, 20),
+    anchor: new window.google.maps.Point(12, 21),
   };
 
   const iconSelected = {
@@ -68,7 +68,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     strokeColor: "white",
     rotation: 0,
     scale: 2.3,
-    anchor: new window.google.maps.Point(10, 20),
+    anchor: new window.google.maps.Point(12, 21),
   };
 
   if (loadError) return <div>Sorry, map cannot be loaded at this time.</div>;
@@ -80,30 +80,28 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {markers?.map(({ place_id, url, website, name, photos, geometry, description }) => {
+      {markers?.map((place) => {
+        const place_id = place.place_id;
+        const position = place.geometry.location;
         const isSelected = activeMarker === place_id;
 
         return (
           <Marker
             key={place_id}
-            position={geometry.location}
-            icon={isSelected ? iconSelected : icon}
+            position={position}
+            icon={isSelected && isMobile ? "none" : isSelected && !isMobile ? iconSelected : icon}
             onClick={() => handleActiveMarker(place_id)}
           >
             {isSelected &&
               (!isMobile ? (
-                map.panTo(geometry.location)
+                map.panTo(position)
               ) : (
-                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                  <InfoWindowDetails
-                    map={map}
-                    name={name}
-                    website={website}
-                    place_id={place_id}
-                    url={url}
-                    description={description}
-                  />
-                </InfoWindow>
+                <InfoWindowComponent
+                  map={map}
+                  position={position}
+                  setActiveMarker={setActiveMarker}
+                  place={place}
+                />
               ))}
           </Marker>
         );
@@ -133,9 +131,11 @@ const StyledDetails = styled.div`
   }
 `;
 
-const InfoWindowDetails = ({ map, place_id, name, website, url, description }) => {
+const InfoWindowComponent = ({ setActiveMarker, map, position, place }) => {
   const [image, setImage] = useState(null);
   const [source, setSource] = useState(null);
+
+  const { place_id, url, website, name, description } = place;
 
   const service = new window.google.maps.places.PlacesService(map);
   service.getDetails(
@@ -150,21 +150,22 @@ const InfoWindowDetails = ({ map, place_id, name, website, url, description }) =
       }
     }
   );
-
   return (
-    <StyledDetails>
-      <h3>{name}</h3>
-      <a href={website} target={"_blank"} rel="noreferrer">
-        {websiteIcon}&nbsp;Website
-      </a>
-      <a href={url} target={"_blank"} rel="noreferrer">
-        &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
-      </a>
-      <p>{description}</p>
-      <img src={image} alt={"restaurant"} />
-      <p>
-        Source: <span dangerouslySetInnerHTML={{ __html: source }} />
-      </p>
-    </StyledDetails>
+    <InfoWindow onCloseClick={() => setActiveMarker(null)} position={position}>
+      <StyledDetails>
+        <h3>{name}</h3>
+        <a href={website} target={"_blank"} rel="noreferrer">
+          {websiteIcon}&nbsp;Website
+        </a>
+        <a href={url} target={"_blank"} rel="noreferrer">
+          &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
+        </a>
+        <p>{description}</p>
+        <img src={image} alt={"restaurant"} />
+        <p>
+          Source: <span dangerouslySetInnerHTML={{ __html: source }} />
+        </p>
+      </StyledDetails>
+    </InfoWindow>
   );
 };
