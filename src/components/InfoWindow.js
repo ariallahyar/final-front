@@ -3,7 +3,8 @@ import { InfoWindow } from "@react-google-maps/api";
 import { websiteIcon, addressIcon } from "../assets/icons";
 import styled from "styled-components";
 
-const StyledDetails = styled.div`
+const StyledDetails = styled.article(
+  ({ theme }) => `
   width: 180px;
   max-height: 250px;
   overflow-y: scroll;
@@ -13,18 +14,48 @@ const StyledDetails = styled.div`
   display: flex;
   flex-direction: column;
 
-  h3 {
-    margin: 0 0 5px 0;
+  div {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    margin: 8px 0;
+    
+    p, a {
+      padding: 0;
+      margin: 0;
+    }
+    
+    p { 
+      font-size: ${theme.fontSizes.small};
+      text-align: center;
+    }
   }
 
-  p {
-    margin: 10px 0;
+  figure,
+  img {
+    margin: 0;
+    width: 100%;
+    position: relative;
   }
-`;
+  
+  span {
+    padding: 1px 4px;
+    background: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    font-size: 8px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    
+    a {
+      color: white;
+    }
+  }
+`
+);
 
 const MarkerInfoWindow = ({ setActiveMarker, map, position, place }) => {
-  const [image, setImage] = useState(null);
-  const [source, setSource] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
+  const [imgSource, setImgSource] = useState(null);
 
   const { place_id, url, website, name, description } = place;
 
@@ -36,27 +67,33 @@ const MarkerInfoWindow = ({ setActiveMarker, map, position, place }) => {
     },
     (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        setImage(results.photos[0].getUrl({ maxWidth: 300, maxHeight: 300 }));
-        setSource(results.photos[0].html_attributions[0]);
+        setImgUrl(results.photos[0].getUrl({ maxWidth: 300, maxHeight: 300 }));
+        setImgSource(results.photos[0].html_attributions[0]);
       }
     }
   );
-  
+
   return (
     <InfoWindow onCloseClick={() => setActiveMarker(null)} position={position}>
       <StyledDetails>
         <h3>{name}</h3>
-        <a href={website} target={"_blank"} rel="noreferrer">
-          {websiteIcon}&nbsp;Website
-        </a>
-        <a href={url} target={"_blank"} rel="noreferrer">
-          &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
-        </a>
+        <div>
+          <p>{websiteIcon}</p>
+          <a href={website} target={"_blank"} rel="noreferrer">
+            Website
+          </a>
+          <p>{addressIcon}</p>
+          <a href={url} target={"_blank"} rel="noreferrer">
+            View on Google Maps
+          </a>
+        </div>
         <p>{description}</p>
-        <img src={image} alt={"restaurant"} />
-        <p>
-          Source: <span dangerouslySetInnerHTML={{ __html: source }} />
-        </p>
+        <figure>
+          <img src={imgUrl} alt={name} />
+          <figcaption>
+            <span dangerouslySetInnerHTML={{ __html: imgSource }} />
+          </figcaption>
+        </figure>
       </StyledDetails>
     </InfoWindow>
   );
