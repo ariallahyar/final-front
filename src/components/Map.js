@@ -1,19 +1,20 @@
 import React, { memo, useMemo, useCallback, useState, useEffect } from "react";
-import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
-import { websiteIcon, addressIcon } from "../assets/icons";
-import { getPhoto } from "../api/place";
-import styled from "styled-components";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { base } from "../themes";
+import MarkerInfoWindow from "./InfoWindow";
 
-const markerColor = base.colors.secondary;
+const loadOptions = {
+  id: "google-map-script",
+  libraries: ["places"],
+  googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+};
 
 const mapContainerStyle = { width: "100%", height: "100%" };
 
+const markerColor = base.colors.secondary;
+
 const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
+  const { isLoaded, loadError } = useJsApiLoader(loadOptions);
 
   const [map, setMap] = useState(null);
 
@@ -29,7 +30,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     }
   }, [map, markers]);
 
-  const options = useMemo(
+  const mapOptions = useMemo(
     () => ({
       mapId: "1d387d12bfc69874",
       disableDefaultUi: true,
@@ -55,7 +56,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     strokeColor: "white",
     rotation: 0,
     scale: 2,
-    anchor: new window.google.maps.Point(10, 20),
+    anchor: new window.google.maps.Point(12, 21),
   };
 
   const iconSelected = {
@@ -66,38 +67,40 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     strokeColor: "white",
     rotation: 0,
     scale: 2.3,
-    anchor: new window.google.maps.Point(10, 20),
+    anchor: new window.google.maps.Point(12, 21),
   };
+
+  if (loadError) return <div>Sorry, map cannot be loaded at this time.</div>;
 
   return (
     <GoogleMap
       onLoad={onLoad}
-      options={options}
+      options={mapOptions}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={mapContainerStyle}
     >
-      {markers?.map(({ place_id, url, website, name, photos, geometry, description }) => {
+      {markers?.map((place) => {
+        const place_id = place.place_id;
+        const position = place.geometry.location;
         const isSelected = activeMarker === place_id;
+
         return (
           <Marker
             key={place_id}
-            position={geometry.location}
-            icon={isSelected ? iconSelected : icon}
+            position={position}
+            icon={isSelected && isMobile ? "none" : isSelected && !isMobile ? iconSelected : icon}
             onClick={() => handleActiveMarker(place_id)}
           >
             {isSelected &&
               (!isMobile ? (
-                map.panTo(geometry.location)
+                map.panTo(position)
               ) : (
-                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                  <InfoWindowDetails
-                    name={name}
-                    website={website}
-                    photoRef={photos[0].photo_reference}
-                    url={url}
-                    description={description}
-                  />
-                </InfoWindow>
+                <MarkerInfoWindow
+                  map={map}
+                  position={position}
+                  setActiveMarker={setActiveMarker}
+                  place={place}
+                />
               ))}
           </Marker>
         );
@@ -107,42 +110,3 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
 };
 
 export default memo(Map);
-
-const StyledDetails = styled.div`
-  width: 180px;
-  max-height: 250px;
-  overflow-y: scroll;
-  padding: 0px 10px 0px 0px;
-  margin: 0;
-  border-bottom: 10px solid white;
-  display: flex;
-  flex-direction: column;
-
-  h3 {
-    margin: 0 0 5px 0;
-  }
-
-  p {
-    margin: 10px 0;
-  }
-`;
-
-const InfoWindowDetails = ({ name, website, url, description, photoRef }) => {
-  const [image, setImage] = useState(null);
-
-  useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [photoRef]);
-
-  return (
-    <StyledDetails>
-      <h3>{name}</h3>
-      <a href={website} target={"_blank"} rel="noreferrer">
-        {websiteIcon}&nbsp;Website
-      </a>
-      <a href={url} target={"_blank"} rel="noreferrer">
-        &nbsp;{addressIcon}&nbsp;&nbsp;View on Google Maps
-      </a>
-      <p>{description}</p>
-      <img src={image} alt={"restaurant"} />
-    </StyledDetails>
-  );
-};
