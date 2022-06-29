@@ -33,8 +33,10 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
   const mapOptions = useMemo(
     () => ({
       mapId: "1d387d12bfc69874",
-      disableDefaultUi: true,
+      mapTypeControl: false,
+      streetViewControl: false,
       clickableIcons: false,
+      fullscreenControl: false,
     }),
     []
   );
