@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Place = styled.article(
   ({ theme }) => `
   margin-bottom: 15px;
+  padding-bottom: 20px;
   border-bottom: 0.8px solid silver;
 
   h2 {
@@ -14,6 +15,11 @@ const Place = styled.article(
     &:hover {
       cursor: pointer;
     }
+  }
+
+  span {
+    font-size: ${theme.fontSizes.tiny};
+    color: ${theme.colors.secondary};
   }
 
   p {
@@ -26,32 +32,29 @@ const Place = styled.article(
 
   figure {
     margin: 0;
-    position: relative;
-    margin-bottom: 20px
-  }
-
-  img {
-    width: 100%;
-  }
-  
-  span {
-    background: rgba(0, 0, 0, 0.5);
-    display: inline-block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 0px 4px;
-    font-size: ${theme.fontSizes.tiny};
+    position: relative;    
+    img {
+      width: 100%;
+    }
     
-    a {
-      color: white;
-      font-size: inherit;
-    }
-    a:hover {
-      text-decoration: none;
+    span {
+      background: rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0px 4px;
+      font-size: ${theme.fontSizes.tiny};
+      
+      a {
+        color: white;
+        font-size: inherit;
+      }
+      a:hover {
+        text-decoration: none;
+      }
     }
   }
-
 `
 );
 
