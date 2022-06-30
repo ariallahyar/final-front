@@ -58,7 +58,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     strokeColor: "white",
     rotation: 0,
     scale: 2,
-    anchor: new window.google.maps.Point(12, 21),
+    anchor: new window.google.maps.Point(12, 21.75),
   };
 
   const iconSelected = {
@@ -69,7 +69,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
     strokeColor: "white",
     rotation: 0,
     scale: 2.3,
-    anchor: new window.google.maps.Point(12, 21),
+    anchor: new window.google.maps.Point(12, 21.75),
   };
 
   if (loadError) return <div>Sorry, map cannot be loaded at this time.</div>;
@@ -90,7 +90,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
           <Marker
             key={place_id}
             position={position}
-            icon={isSelected && isMobile ? "none" : isSelected && !isMobile ? iconSelected : icon}
+            icon={isSelected && !isMobile ? iconSelected : icon}
             onClick={() => handleActiveMarker(place_id)}
           >
             {isSelected &&
