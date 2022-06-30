@@ -19,23 +19,37 @@ const Section = styled.section(
     font-family: ${theme.fontFamily.title};
     text-transform: uppercase;
   }
-
+  
   h3 {
     font-size: ${theme.fontSizes.large};
     letter-spacing: -0.5px;
     margin: 20px 0 5px 0;
   }
-
+  
   p {
     text-align: left;
   }
 
   form {
+    margin: 20px 0;
+    padding: 40px 10px;
+    width: 100%;
     align-self: center;
     text-align: center;
-
+    background: ${theme.colors.backgroundLight};
+    
     h3 {
+      margin: 0;
       font-weight: bolder;
+    }
+    
+    p {
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    input, button {
+      margin: 0;
     }
   }
 `
@@ -76,26 +90,30 @@ const SupperSocietyPage = () => {
       <p>Dinner guests split grocery costs with the other diners. Costs vary per occasion.</p>
       <h3>What about drinks?</h3>
       <p>To accommodate all preferences, guests are asked to BYOB or whatever floats their boat.</p>
-      {didSubmit ? (
-        <ThankYou>
-          <h3>Thanks for subscribing {awardIcon} Stay tuned!</h3>
-        </ThankYou>
-      ) : (
-        <form onSubmit={handleOnSubmit}>
-          <h3>I'm in {boltIcon} Keep me updated!</h3>
-          <div>
-            <input
-              id={"signup"}
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="example@test.com"
-              required
-            />
-            <SubmitButton dark disabled={!email} label="Subscribe" />
-          </div>
-        </form>
-      )}
+      <form onSubmit={handleOnSubmit}>
+        {didSubmit ? (
+          <ThankYou>
+            <h3>Thanks for subscribing {awardIcon}</h3>
+            <h3>Stay tuned!</h3>
+          </ThankYou>
+        ) : (
+          <>
+            <h3>I'm in {boltIcon} Keep me updated!</h3>
+            <p>Join Supper Society's email list to be the first to know about upcoming events.</p>
+            <div>
+              <input
+                id={"signup"}
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="example@domain.com"
+                required
+              />
+              <SubmitButton dark disabled={!email} label="Subscribe" />
+            </div>
+          </>
+        )}
+      </form>
     </Section>
   );
 };
