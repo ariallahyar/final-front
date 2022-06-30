@@ -70,7 +70,7 @@ const MarkerInfoWindow = ({ setActiveMarker, map, position, place }) => {
     },
     (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        setImgUrl(results.photos[0].getUrl({ maxWidth: 300, maxHeight: 300 }));
+        setImgUrl(results.photos[0].getUrl({ maxWidth: 200 }));
         setImgSource(results.photos[0].html_attributions[0]);
       }
     }
