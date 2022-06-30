@@ -46,8 +46,10 @@ const RecommendationsPage = () => {
       <Recommendations>
         <h2>Community favorites</h2>
         <p>
-          Here is a bit of text explaining what this is all about. Hope you find it interesting.
-          I'll just add some more text to see the line break.
+          Below are community-curated favorites. Do you have a go-to cafe to sit down with a cup of
+          coffee and a good book? Or maybe there's that one restaurant that you always take vistors to
+          to impress when they're in town? Whatever it is, share your favorite spots and help grow
+          our community!
         </p>
         {recommendations.map(({ nameOfPlace, city, comment, website, _id, user_id }) => {
           return (
