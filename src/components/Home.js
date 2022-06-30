@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Map from "./Map";
 import Places from "./Places";
-import { getPlaces } from "../api/place";
 import styled from "styled-components";
-
-// development
-// import data from "../mock-data.json";
 
 const Container = styled.div`
   display: grid;
@@ -47,21 +43,10 @@ const SelectCityOverlay = styled.select(
 `
 );
 
-const options = ["Copenhagen", "Seattle", "Stockholm"];
-
-const Home = ({ isMobile }) => {
+const Home = ({ city, setCity, markers, isMobile }) => {
   const [activeMarker, setActiveMarker] = useState(null);
-  const [city, setCity] = useState("Copenhagen");
-  const [markers, setMarkers] = useState([]);
 
-  useEffect(() => getPlaces(city, (data) => setMarkers(data)), [city]);
-
-  // development
-  // const [markers, setMarkers] = useState(data.results.filter((result) => result.city === city));
-
-  // useEffect(() => {
-  //   setMarkers(() => data.results.filter((result) => result.city === city));
-  // }, [city]);
+  const options = ["Copenhagen", "Seattle", "Stockholm"];
 
   return (
     <>
