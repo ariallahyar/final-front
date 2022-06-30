@@ -19,7 +19,6 @@ export const sendRecommendation = (city, nameOfPlace, comment, website, callback
   })
     .then((response) => {
       if (response.ok) return response.json();
-      return console.log("Validation error");
     })
     .then((data) => callback(data.result))
     .catch((error) => console.log(error));
@@ -37,7 +36,6 @@ export const deleteRecommendation = (id, callback) => {
   })
     .then((response) => {
       if (response.ok) return response.json();
-      return console.log("User not authorized");
     })
     .then((data) => callback(data.deleted))
     .catch((error) => console.log(error));

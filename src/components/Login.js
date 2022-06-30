@@ -81,7 +81,7 @@ const Login = ({ setAuthorized }) => {
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="example@test.com"
+          placeholder="example@domain.com"
           required
         />
         <label htmlFor="password">Password</label>

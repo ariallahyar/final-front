@@ -14,8 +14,7 @@ export const createAccount = (name, email, password, error, callback) => {
       localStorage.setItem("Token", data.token);
       localStorage.setItem("ID", data._id);
       callback();
-    })
-    .catch((error) => console.log(error));
+    });
 };
 
 export const login = (email, password, error, callback) => {
@@ -26,15 +25,13 @@ export const login = (email, password, error, callback) => {
   })
     .then((response) => {
       if (response.ok) return response.json();
-      // return Promise.reject(new Error(response.statusText));
       return error(true);
     })
     .then((data) => {
       localStorage.setItem("Token", data.token);
       localStorage.setItem("ID", data._id);
       callback();
-    })
-    .catch((error) => console.log(error));
+    });
 };
 
 export const logout = (callback) => {
@@ -48,7 +45,6 @@ export const logout = (callback) => {
   })
     .then((response) => {
       if (response.ok) return response.json();
-      return console.log("error");
     })
     .then(() => {
       localStorage.removeItem("Token");
@@ -69,7 +65,6 @@ export const deleteAccount = (callback) => {
   })
     .then((response) => {
       if (response.ok) return response.json();
-      return console.log("User not found");
     })
     .then(() => {
       localStorage.removeItem("ID");
