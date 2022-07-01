@@ -5,7 +5,8 @@ import { logout, deleteAccount } from "../api/user-auth";
 import { SubmitButton } from "./Button";
 import styled from "styled-components";
 
-const Container = styled.section`
+const Container = styled.section(
+  ({ theme }) => `
   display: flex;
   flex-direction: column;
   max-width: 600px;
@@ -16,11 +17,17 @@ const Container = styled.section`
     margin-bottom: 20px;
   }
 
+  span {
+    font-weight: bolder;
+    color: ${theme.colors.secondary};
+  }
+
   a {
     font-weight: 500;
     text-decoration: underline;
   }
-`;
+`
+);
 
 const DeleteButton = styled.button`
   color: grey;
@@ -34,6 +41,8 @@ const DeleteButton = styled.button`
 
 const ProfilePage = () => {
   const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
+
+  const name = localStorage.getItem("Name");
 
   const confirmToDelete = () => {
     const confirmBox = window.confirm("Do you really want to delete your account?");
@@ -56,7 +65,9 @@ const ProfilePage = () => {
 
   return (
     <Container>
-      <h2>Welcome to your profile page</h2>
+      <h2>
+        Welcome <span>{name}</span> to your profile page
+      </h2>
       <p>
         Check out our <Link to="/community">Community</Link> page to submit your own recommendation!
         This profile page will be further developed along with{" "}

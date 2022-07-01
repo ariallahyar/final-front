@@ -1,5 +1,17 @@
 import { API_URL } from "./api";
 
+const clearLocalStorage = () => {
+  localStorage.removeItem("ID");
+  localStorage.removeItem("Token");
+  localStorage.removeItem("Name");
+};
+
+const setLocalStorage = (data) => {
+  localStorage.setItem("Token", data.token);
+  localStorage.setItem("ID", data._id);
+  localStorage.setItem("Name", data.name);
+};
+
 export const createAccount = (name, email, password, error, callback) => {
   fetch(`${API_URL}/user`, {
     method: "POST",
@@ -11,8 +23,7 @@ export const createAccount = (name, email, password, error, callback) => {
       return error(true);
     })
     .then((data) => {
-      localStorage.setItem("Token", data.token);
-      localStorage.setItem("ID", data._id);
+      setLocalStorage(data);
       callback();
     });
 };
@@ -28,8 +39,7 @@ export const login = (email, password, error, callback) => {
       return error(true);
     })
     .then((data) => {
-      localStorage.setItem("Token", data.token);
-      localStorage.setItem("ID", data._id);
+      setLocalStorage(data);
       callback();
     });
 };
@@ -47,8 +57,7 @@ export const logout = (callback) => {
       if (response.ok) return response.json();
     })
     .then(() => {
-      localStorage.removeItem("Token");
-      localStorage.removeItem("ID");
+      clearLocalStorage();
       callback();
     })
     .catch((error) => console.log(error));
@@ -67,8 +76,7 @@ export const deleteAccount = (callback) => {
       if (response.ok) return response.json();
     })
     .then(() => {
-      localStorage.removeItem("ID");
-      localStorage.removeItem("Token");
+      clearLocalStorage();
       callback();
     })
     .catch((error) => console.log(error));
