@@ -18,7 +18,7 @@ const Article = styled.article(
     font-family: ${theme.fontFamily.title};
     font-size: ${theme.fontSizes.xlarge};
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   
   button {
@@ -42,6 +42,10 @@ const Grid = styled.div(
   p, a {
     font-size: ${theme.fontSizes.small};
   }
+
+  a {
+    text-decoration: underline;
+  }
 `
 );
 
@@ -52,16 +56,12 @@ const Details = styled.p(
 `
 );
 
-const RecommendationCard = ({
-  id,
-  userId,
-  nameOfPlace,
-  city,
-  website,
-  comment,
-  setRecommendations,
-}) => {
-  const isUsersOwnRecommendation = userId === localStorage.getItem("ID");
+const RecommendationCard = ({ recommendation, setRecommendations }) => {
+  const { id, user_id, nameOfPlace, city, website, comment, submittedBy } = recommendation;
+
+  const isUsersOwnRecommendation = user_id === localStorage.getItem("ID");
+
+  const formattedName = submittedBy.charAt(0).toUpperCase() + submittedBy.slice(1);
 
   const confirmToDelete = () => {
     const confirmBox = window.confirm("Are you sure you want to delete your recommendation?");
@@ -84,7 +84,9 @@ const RecommendationCard = ({
             {website}
           </a>
         </Grid>
-        <Details>{comment}</Details>
+        <Details>
+          "{comment}" —{formattedName}
+        </Details>
       </div>
       {isUsersOwnRecommendation && <button onClick={confirmToDelete}>{trashIcon}</button>}
     </Article>

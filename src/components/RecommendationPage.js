@@ -47,21 +47,15 @@ const RecommendationsPage = () => {
         <h2>Community favorites</h2>
         <p>
           Below are community-curated favorites. Do you have a go-to cafe to sit down with a cup of
-          coffee and a good book? Or maybe there's that one restaurant that you always take vistors to
-          to impress when they're in town? Whatever it is, share your favorite spots and help grow
-          our community!
+          coffee and a good book? Or maybe there's that one restaurant that you always take vistors
+          to to impress when they're in town? Whatever it is, share your favorite spots and help
+          grow our community!
         </p>
-        {recommendations.map(({ nameOfPlace, city, comment, website, _id, user_id }) => {
+        {recommendations.map((recommendation) => {
           return (
             <RecommendationCard
-              key={_id}
-              id={_id}
-              userId={user_id}
-              nameOfPlace={nameOfPlace}
-              city={city}
-              website={website}
-              comment={comment}
-              recommendations={recommendations}
+              key={recommendation._id}
+              recommendation={recommendation}
               setRecommendations={setRecommendations}
             />
           );

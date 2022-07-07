@@ -43,6 +43,7 @@ const ProfilePage = () => {
   const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
 
   const name = localStorage.getItem("Name");
+  const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
 
   const confirmToDelete = () => {
     const confirmBox = window.confirm("Do you really want to delete your account?");
@@ -66,7 +67,7 @@ const ProfilePage = () => {
   return (
     <Container>
       <h2>
-        Welcome <span>{name}</span> to your profile page
+        Welcome <span>{formattedName}</span> to your profile page
       </h2>
       <p>
         Check out our <Link to="/community">Community</Link> page to submit your own recommendation!
