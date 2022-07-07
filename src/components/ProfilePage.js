@@ -43,10 +43,13 @@ const ProfilePage = () => {
   const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
 
   const name = localStorage.getItem("Name");
-  const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+
+  const formattedName = name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
 
   const confirmToDelete = () => {
-    const confirmBox = window.confirm("Do you really want to delete your account?");
+    const confirmBox = window.confirm(
+      "Are you sure you want to delete your account? Deleting your account will delete all data, including submitted recommendations."
+    );
     if (confirmBox === true) {
       deleteAccount(() => setAuthorized(localStorage.getItem("Token")));
     }
