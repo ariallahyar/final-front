@@ -117,6 +117,7 @@ const Layout = ({ isMobile }) => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/community">Community</NavLink>
             <NavLink to="/society">Supper Society</NavLink>
+            <NavLink to="/about">About</NavLink>
             <NavLink to="/profile">{profileIcon}</NavLink>
           </nav>
         </DesktopHeader>
