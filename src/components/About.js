@@ -23,7 +23,6 @@ const Container = styled.section(
 
 	img {
 		margin: 10px 0;
-		width: 250px;
 		align-self: center;
 		border-radius: 5px;
 	}
@@ -41,20 +40,24 @@ const Container = styled.section(
 const AboutPage = () => {
   return (
     <Container>
-      <h2>Hello there</h2>
+      <h2>About</h2>
       <p>
-        Welcome to <span>Favoreats</span>. Here will be some text explaining my motivation behind
-        why I built this hobby project.
+        Welcome to <span>Favoreats</span>, a place that provides curated eats sourced from personal
+        dining experiences and community contributions.
+      </p>
+      <img src="https://i.ibb.co/NLDPYXy/seattle.jpg" alt="profile of Arianna" border="0" />
+      <p>
+        <span>I'm Arianna</span>, the foodie behind Favoreats! I created this site to combine a few
+        of my interests: eating great food, exploring new areas, sharing knowledge, and, more
+        recently, learning to program.
       </p>
       <p>
-        Now I am just going to keep typing som more placeholder text to fill up the page and create
-        multiple divs.
+        Favoreats launched in June 2022 and is currently in the early stages of development. In the
+        future I hope to include features for organizing dinner parties and sharing recipes.
+        Michelin stars aren't necessary to eat great food; sometimes the best meals are enjoyed
+        right at home.
       </p>
       <p>Thanks for stopping by! </p>
-      <img
-        src="https://images.unsplash.com/photo-1624813743954-d32f24df6cf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFzcGJlcnJ5fGVufDB8fDB8fA%3D%3D&w=300&q=80"
-        alt="my favorite food"
-      />
       <div>
         <h2>{emailIcon}</h2>
         <h2>Let's get in touch</h2>
