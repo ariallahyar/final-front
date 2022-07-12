@@ -10,7 +10,7 @@ const Container = styled.div`
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 88vh;
+    grid-template-rows: 90vh;
   }
 
   section {
@@ -20,8 +20,8 @@ const Container = styled.div`
 
 const SelectCityOverlay = styled.select(
   ({ theme }) => `
-  bottom: 23px;
-  left: 12px;
+  bottom: 30px;
+  left: 10px;
   position: absolute;
   z-index: 2;
   min-width: 160px;

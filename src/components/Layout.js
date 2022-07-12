@@ -4,14 +4,19 @@ import { SideMenu } from "./SideMenu";
 import { profileIcon } from "../assets/icons";
 import styled from "styled-components";
 
+const Container = styled.div(
+  ({ theme }) => `
+  width: 100%;
+  background-color: ${theme.colors.backgroundDark};
+  height: 56px;
+  margin-bottom: 10px;
+`
+);
+
 const DesktopHeader = styled.header(
   ({ theme }) => `
-  margin-bottom: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
-  height: 56px;
-  background-color: ${theme.colors.backgroundDark};
 
   h1 {
     padding-top: 2px;
@@ -83,17 +88,15 @@ const MobileHeader = styled.header(
 
 const Footer = styled.footer(
   ({ theme }) => `
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 20px;
   font-size: ${theme.fontSizes.tiny};
   color: ${theme.colors.primary};
-  background-color: white;
+  position: absolute;
   display: flex;
+  align-items: center; 
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  height: 40px;
+  bottom: 0;
 `
 );
 
@@ -106,21 +109,23 @@ const Layout = ({ isMobile }) => {
           <SideMenu />
         </MobileHeader>
       ) : (
-        <DesktopHeader>
-          <h1>FAVOREATS</h1>
-          <nav
-            activestyle={{
-              fontWeight: "bold",
-              color: "red",
-            }}
-          >
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/community">Community</NavLink>
-            <NavLink to="/society">Supper Society</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/profile">{profileIcon}</NavLink>
-          </nav>
-        </DesktopHeader>
+        <Container>
+          <DesktopHeader>
+            <h1>FAVOREATS</h1>
+            <nav
+              activestyle={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+            >
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/community">Community</NavLink>
+              <NavLink to="/society">Supper Society</NavLink>
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/profile">{profileIcon}</NavLink>
+            </nav>
+          </DesktopHeader>
+        </Container>
       )}
       <main>
         <Outlet />

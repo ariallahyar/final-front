@@ -82,8 +82,8 @@ export const SideMenu = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/community">Community</NavLink>
           <NavLink to="/society">Supper Society</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/about">About</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
         </Menu>
       )}
     </nav>

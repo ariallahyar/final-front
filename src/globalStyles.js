@@ -9,14 +9,17 @@ export const GlobalStyle = createGlobalStyle(
 
   body {
     margin: 0 auto;
-    max-width: 1800px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    min-height: 100vh;
   }
   
   main, header {
-    padding: 0 20px;
+    padding: 0 20px 40px 20px;
+    max-width: 1600px;
+    margin: 0 auto;
   }
 
   h1, h2, h3, h4, p, a, button {

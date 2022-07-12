@@ -21,7 +21,7 @@ const Container = styled.div`
 const Recommendations = styled.section(
   ({ theme }) => `
   @media (min-width: 768px) {
-    height: 88vh;
+    height: 90vh;
     padding: 0 20px 0 0;
     overflow-x: scroll;
   }
