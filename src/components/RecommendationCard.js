@@ -5,11 +5,10 @@ import styled from "styled-components";
 
 const Article = styled.article(
   ({ theme }) => `
+
   margin: 20px 0;
-  padding: 10px 20px;
+  padding: 20px;
   border-radius: 5px;
-  display: grid;
-  grid-template-columns: 1fr 28px;
   border: 1px solid ${theme.colors.backgroundLight};
   box-shadow: 0 2px 6px 0px  ${theme.colors.backgroundLight};
   
@@ -18,41 +17,54 @@ const Article = styled.article(
     font-family: ${theme.fontFamily.title};
     font-size: ${theme.fontSizes.xlarge};
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
-  
-  button {
-    color: silver;
-    font-size: ${theme.fontSizes.default};
-    align-self: flex-start;
-    
-    &:hover {
-      color: rgb(255, 0, 0, 0.8);
-    }
+
+  p {
+    margin: 15px 0;
   }
 `
 );
 
-const Grid = styled.div(
+const DetailsGrid = styled.div(
   ({ theme }) => `
 
   display: grid;
   grid-template-columns: 28px 1fr;
 
   p, a {
+    margin: 0;
     font-size: ${theme.fontSizes.small};
-  }
-
-  a {
-    text-decoration: underline;
   }
 `
 );
 
-const Details = styled.p(
+const AuthorGrid = styled.div(
   ({ theme }) => `
-  margin-top: 10px;
-  font-weight: 500;
+
+  display: grid;
+  grid-template-columns: 1fr 28px;
+  align-items: center;
+
+  p {
+    margin: 0;
+    color: silver;
+    font-size: ${theme.fontSizes.small};
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  button {
+    margin: 0;
+    color: silver;
+    font-size: ${theme.fontSizes.default};
+ }
+
+  @media (min-width: 768px) {
+    button:hover {
+      color: rgb(255, 0, 0, 0.8);
+    }
+  }
 `
 );
 
@@ -74,21 +86,20 @@ const RecommendationCard = ({ recommendation, setRecommendations }) => {
 
   return (
     <Article>
-      <div>
-        <h3>{nameOfPlace}</h3>
-        <Grid>
-          <p>{cityIcon}</p>
-          <p>{city}</p>
-          <p>{websiteIcon}</p>
-          <a href={website} target={"_blank"} rel="noreferrer">
-            {website}
-          </a>
-        </Grid>
-        <Details>
-          "{comment}" —{formattedName}
-        </Details>
-      </div>
-      {isUsersOwnRecommendation && <button onClick={confirmToDelete}>{trashIcon}</button>}
+      <h3>{nameOfPlace}</h3>
+      <DetailsGrid>
+        <p>{cityIcon}</p>
+        <p>{city}</p>
+        <p>{websiteIcon}</p>
+        <a href={website} target={"_blank"} rel="noreferrer">
+          {website}
+        </a>
+      </DetailsGrid>
+      <p>{comment}</p>
+      <AuthorGrid>
+        <p>Submitted by {formattedName}</p>
+        {isUsersOwnRecommendation && <button onClick={confirmToDelete}>{trashIcon}</button>}
+      </AuthorGrid>
     </Article>
   );
 };
