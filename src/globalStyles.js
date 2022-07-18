@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle(
     -moz-osx-font-smoothing: grayscale;
     position: relative;
     min-height: 100vh;
+    // border: 1px solid red;
   }
   
   main, header {

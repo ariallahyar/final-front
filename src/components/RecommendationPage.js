@@ -10,28 +10,33 @@ const Container = styled.div`
   grid-template-columns: 1fr;
 
   h2 {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
+    
   }
 `;
 
 const Recommendations = styled.section(
   ({ theme }) => `
   @media (min-width: 768px) {
-    height: 90vh;
+    height: 86vh;
+    overflow-x: auto;
     padding: 0 20px 0 0;
-    overflow-x: scroll;
   }
 `
 );
 
 const FormContainer = styled.section(
-  ({ theme }) => `
+  ({ theme }) => `  
   background-color: ${theme.colors.backgroundLight};
   padding: 20px;
+
+  input, textarea {
+    border: none;
+  }
 `
 );
 
@@ -40,7 +45,6 @@ const RecommendationsPage = () => {
   const [authorized, setAuthorized] = useState(localStorage.getItem("Token"));
 
   useEffect(() => getRecommendations((results) => setRecommendations(results)), []);
-
   return (
     <Container>
       <Recommendations>
@@ -62,16 +66,11 @@ const RecommendationsPage = () => {
         })}
       </Recommendations>
       <FormContainer>
+        <h3>Submit a recommendation</h3>
         {authorized ? (
-          <>
-            <h3>Submit a recommendation</h3>
-            <RecommendationForm authorized={authorized} setRecommendations={setRecommendations} />
-          </>
+          <RecommendationForm authorized={authorized} setRecommendations={setRecommendations} />
         ) : (
-          <>
-            <h3>Log in to submit a recommendation</h3>
-            <Login setAuthorized={setAuthorized} />
-          </>
+          <Login setAuthorized={setAuthorized} />
         )}
       </FormContainer>
     </Container>

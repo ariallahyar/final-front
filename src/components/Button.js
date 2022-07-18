@@ -13,7 +13,6 @@ const StyledButton = styled.button(
     color: ${dark ? theme.colors.btnLightText : theme.colors.btnLightText};
     background-color: ${dark ? theme.colors.btnLightFill : theme.colors.btnLightFill};
     border: 2px solid ${theme.colors.btnDarkBorder};
-    font-weight: bold;
   }
 
   &:disabled {

@@ -45,19 +45,22 @@ const AuthorGrid = styled.div(
   display: grid;
   grid-template-columns: 1fr 28px;
   align-items: center;
-
+  color: darkgray;
+  font-size: ${theme.fontSizes.small};
+  
   p {
     margin: 0;
-    color: silver;
-    font-size: ${theme.fontSizes.small};
+    font-weight: 500; 
     text-transform: uppercase;
-    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  span {
+    font-weight: 800;
   }
 
   button {
     margin: 0;
-    color: silver;
-    font-size: ${theme.fontSizes.default};
  }
 
   @media (min-width: 768px) {
@@ -97,7 +100,9 @@ const RecommendationCard = ({ recommendation, setRecommendations }) => {
       </DetailsGrid>
       <p>{comment}</p>
       <AuthorGrid>
-        <p>Submitted by {formattedName}</p>
+        <p>
+          Recommended by <span>{formattedName}</span>
+        </p>
         {isUsersOwnRecommendation && <button onClick={confirmToDelete}>{trashIcon}</button>}
       </AuthorGrid>
     </Article>

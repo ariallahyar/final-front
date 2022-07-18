@@ -1,26 +1,56 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { subscribe } from "../api/subscriber";
-import { utensilsIcon, boltIcon, awardIcon } from "../assets/icons";
+import { boltIcon, awardIcon } from "../assets/icons";
 import { SubmitButton } from "./Button";
 
+const Image = styled.div`
+  align-self: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 225px;
+  background-color: whitesmoke;
+  width: 100%;
+
+  img {
+    position: relative;
+    opacity: 0.4;
+    object-fit: cover;
+  }
+
+  h2 {
+    position: absolute;
+    z-index: 1;
+    font-size: 42px;
+    text-shadow: 0px 0px 5px white;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 350px;
+    max-height: 350px;
+
+    h2 {
+      font-size: 72px;
+    }
+  }
+`;
 const Section = styled.section(
   ({ theme }) => `
-  color: ${theme.colors.primary};
-  max-width: 600px;
-  margin: 36px auto 60px auto;
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   
   h2, i {
+    color: ${theme.colors.primary};
     align-self: center;
-    font-weight: 700;
-    font-size: 32px;
     font-family: ${theme.fontFamily.title};
     text-transform: uppercase;
   }
   
   h3 {
+    color: ${theme.colors.primary};
     font-size: ${theme.fontSizes.large};
     letter-spacing: -0.5px;
     margin: 20px 0 5px 0;
@@ -29,8 +59,9 @@ const Section = styled.section(
   p {
     text-align: left;
   }
-
+  
   form {
+    color: ${theme.colors.primary};
     margin: 20px 0;
     padding: 40px 10px;
     width: 100%;
@@ -48,8 +79,13 @@ const Section = styled.section(
       text-align: center;
     }
 
-    input, button {
-      margin: 0;
+    input {
+      border: 2px solid white;
+      border-radius: 3px 0px 0px 3px;
+    }
+
+    button {
+      border-radius: 0px 3px 3px 0px;
     }
   }
 `
@@ -73,8 +109,10 @@ const SupperSocietyPage = () => {
 
   return (
     <Section>
-      <i>{utensilsIcon}</i>
-      <h2>Supper Society</h2>
+      <Image>
+        <h2>Supper Society</h2>
+        <img src="https://i.ibb.co/gRJwYJz/plates.jpg" alt="plates and silverwear" />
+      </Image>
       <h3>Why join Supper Society?</h3>
       <p>
         Supper Society brings people together to share their love of food by arranging dining

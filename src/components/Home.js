@@ -10,7 +10,7 @@ const Container = styled.div`
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 90vh;
+    grid-template-rows: 86vh;
   }
 
   section {

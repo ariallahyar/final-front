@@ -6,7 +6,7 @@ const Container = styled.section(
   ({ theme }) => `
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 
   h2 {
@@ -22,9 +22,17 @@ const Container = styled.section(
 	}
 
 	img {
+    min-height: 225px;
+    width: 100%;
+    background-color: whitesmoke;
 		margin: 10px 0;
 		align-self: center;
 		border-radius: 5px;
+    object-fit: cover;
+    
+    @media (min-width: 768px) {
+      max-height: 550px;
+    }
 	}
 
 	div {
@@ -34,28 +42,36 @@ const Container = styled.section(
     align-self: center;
     text-align: center;
     background: ${theme.colors.backgroundLight}; 
+    color: ${theme.colors.primary};
+  }
+
 `
 );
 
 const AboutPage = () => {
   return (
     <Container>
-      <h2>About</h2>
+      <h2>Hello there!</h2>
       <p>
         Welcome to <span>Favoreats</span>, a place that provides curated eats sourced from personal
         dining experiences and community contributions.
       </p>
-      <img src="https://i.ibb.co/NLDPYXy/seattle.jpg" alt="profile of Arianna" border="0" />
       <p>
-        <span>I'm Arianna</span>, the foodie behind Favoreats! I created this site to combine a few
-        of my interests: eating great food, exploring new areas, sharing knowledge, and, more
-        recently, learning to program.
+        <span>I'm Arianna</span>, the foodie behind Favoreats! I created this site to combine my
+        love of food with my journey to learn to program. Instead of creating custom maps to pair
+        with rambling emails each time a friend asks for restaurant tips, I was inspired to build
+        something useful from my own "data" I've collected over the years.
+      </p>
+      <img src="https://i.ibb.co/FHS4j73/pair.jpg" alt="Arianna and Oskar" />
+      <p>
+        Partially pictured is my taller half, Oskar - a significant contributer to Favoreats. Not
+        only is Oskar my partner; he is also my code coach, mentor and personal cheerleader, and
+        shares my love of food.
       </p>
       <p>
-        Favoreats launched in June 2022 and is currently in the early stages of development. In the
-        future I hope to include features for organizing dinner parties and sharing recipes.
-        Michelin stars aren't necessary to eat great food; sometimes the best meals are enjoyed
-        right at home.
+        Favoreats launched in June 2022 and is in the early stages of development. Over
+        time I hope to add features for organizing dinner parties and sharing recipes. Michelin
+        stars aren't necessary to eat great food; some of the best meals are enjoyed right at home.
       </p>
       <p>Thanks for stopping by! </p>
       <div>
