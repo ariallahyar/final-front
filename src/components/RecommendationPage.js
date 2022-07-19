@@ -15,14 +15,13 @@ const Container = styled.div`
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
-    
+    height: calc(100vh - 66px - 40px);
   }
 `;
 
 const Recommendations = styled.section(
   ({ theme }) => `
   @media (min-width: 768px) {
-    height: 86vh;
     overflow-x: auto;
     padding: 0 20px 0 0;
   }
@@ -33,6 +32,7 @@ const FormContainer = styled.section(
   ({ theme }) => `  
   background-color: ${theme.colors.backgroundLight};
   padding: 20px;
+  width: 100%;
 
   input, textarea {
     border: none;

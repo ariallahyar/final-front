@@ -6,11 +6,10 @@ import styled from "styled-components";
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 76vh;
+  height: calc(100vh - 66px - 40px);
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 86vh;
   }
 
   section {

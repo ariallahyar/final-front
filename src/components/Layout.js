@@ -89,6 +89,7 @@ const MobileHeader = styled.header(
 const Footer = styled.footer(
   ({ theme }) => `
   font-size: ${theme.fontSizes.tiny};
+  letter-spacing: 0.5px;
   color: ${theme.colors.primary};
   position: absolute;
   display: flex;

@@ -7,18 +7,29 @@ export const GlobalStyle = createGlobalStyle(
     font-family: ${theme.fontFamily.bodyText}
   }
 
+  html, body {
+    height: 100%;
+  }
+
   body {
     margin: 0 auto;
+    position: relative;
+    height: auto !important; /* real browsers */
+    height: 100%; /* IE6: treaded as min-height*/
+    min-height: 100%; /* real browsers */
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    position: relative;
-    min-height: 100vh;
-    // border: 1px solid red;
   }
   
+  main {
+    min-height: calc(100vh - 66px);
+    padding-bottom: 40px;
+  }
+
   main, header {
-    padding: 0 20px 40px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     max-width: 1600px;
     margin: 0 auto;
   }
