@@ -5,6 +5,11 @@ import styled from "styled-components";
 
 const StyledDetails = styled.article(
   ({ theme }) => `
+
+  *:focus {
+    outline: none;
+  }
+  
   width: 180px;
   max-height: 250px;
   border-bottom: 10px solid white;
