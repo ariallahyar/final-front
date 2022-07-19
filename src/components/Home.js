@@ -3,10 +3,17 @@ import Map from "./Map";
 import Places from "./Places";
 import styled from "styled-components";
 
+// const height = window.innerHeight;
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   height: calc(100vh - 66px - 40px);
+
+  @supports (-webkit-touch-callout: none) {
+    /* The hack for Safari */
+    height: -webkit-fill-available;
+  }
 
   @media (min-width: 768px) {
     grid-template-columns: 2fr 1fr;
