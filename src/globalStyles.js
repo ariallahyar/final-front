@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle(
     padding: 0;
     margin: 0;
   }
-
+  
   body {
     margin: 0 auto;
     position: relative;
