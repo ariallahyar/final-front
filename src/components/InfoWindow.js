@@ -41,7 +41,7 @@ const StyledDetails = styled.article(
   figure {
     margin: 0;
     position: relative;  
-    background-color: lightgray;
+    background-color: whitesmoke;
   }
   
   img {
