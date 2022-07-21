@@ -11,7 +11,7 @@ const StyledDetails = styled.article(
   }
   
   width: 180px;
-  max-height: 250px;
+  max-height: 300px;
   border-bottom: 10px solid white;
   display: flex;
   flex-direction: column;
@@ -38,11 +38,17 @@ const StyledDetails = styled.article(
     margin-bottom: 6px;
   }
 
-  figure,
-  img {
+  figure {
     margin: 0;
+    position: relative;  
+    background-color: lightgray;
+  }
+  
+  img {
     width: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   
   span {
@@ -67,6 +73,9 @@ const MarkerInfoWindow = ({ setActiveMarker, map, position, place }) => {
 
   const { place_id, url, website, name, description } = place;
 
+  const width = place.photos[0].width;
+  const height = place.photos[0].height;
+
   const service = new window.google.maps.places.PlacesService(map);
   service.getDetails(
     {
@@ -75,7 +84,7 @@ const MarkerInfoWindow = ({ setActiveMarker, map, position, place }) => {
     },
     (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        setImgUrl(results.photos[0].getUrl({ maxWidth: 200 }));
+        setImgUrl(results.photos[0].getUrl({ maxWidth: 180 }));
         setImgSource(results.photos[0].html_attributions[0]);
       }
     }
@@ -96,7 +105,7 @@ const MarkerInfoWindow = ({ setActiveMarker, map, position, place }) => {
           </a>
         </div>
         <p>{description}</p>
-        <figure>
+        <figure style={{ paddingTop: `${(height / width) * 100}%` }}>
           <img src={imgUrl} alt={name} />
           <figcaption>
             <span dangerouslySetInnerHTML={{ __html: imgSource }} />

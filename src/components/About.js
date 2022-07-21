@@ -31,7 +31,7 @@ const Container = styled.section(
     object-fit: cover;
     
     @media (min-width: 768px) {
-      max-height: 550px;
+      min-height: 500px;
     }
 	}
 
@@ -62,7 +62,7 @@ const AboutPage = () => {
         with rambling emails each time a friend asks for restaurant tips, I was inspired to build
         something useful from my own "data" I've collected over the years.
       </p>
-      <img src="https://i.ibb.co/FHS4j73/pair.jpg" alt="Arianna and Oskar" />
+      <img src="https://i.ibb.co/41Tqfmz/pair.jpg" alt="Arianna and Oskar" />
       <p>
         Partially pictured is my taller half, Oskar - a significant contributer to Favoreats. Not
         only is Oskar my partner; he is also my code coach, mentor and personal cheerleader, and

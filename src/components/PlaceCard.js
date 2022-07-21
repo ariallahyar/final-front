@@ -32,9 +32,14 @@ const Place = styled.article(
 
   figure {
     margin: 0;
-    position: relative;    
+    position: relative;  
+    background-color: lightgray;
+
     img {
       width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
     
     span {
@@ -80,6 +85,9 @@ const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
   const source = place.photos[0].html_attributions[0];
   const photoRef = place.photos[0].photo_reference;
 
+  const width = place.photos[0].width;
+  const height = place.photos[0].height;
+
   useEffect(() => getPhoto(photoRef, (image) => setImage(image)), [place, photoRef]);
 
   const isActiveMarker = place.place_id === activeMarker;
@@ -111,8 +119,8 @@ const PlaceCard = ({ place, activeMarker, setActiveMarker }) => {
         </a>
       </Grid>
       <p>{place.description}</p>
-      <figure>
-        <img src={image} alt={place.name} />
+      <figure style={{ paddingTop: `${(height / width) * 100}%` }}>
+        <img src={image} alt={place.name} styles={{ aspectRatio: width / height }} />
         <figcaption>
           <span dangerouslySetInnerHTML={{ __html: source, disabled: true }} />
         </figcaption>

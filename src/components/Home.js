@@ -6,9 +6,9 @@ import styled from "styled-components";
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  height: calc(100vh - 66px - 40px);
 
   section {
+    height: calc(100vh - 66px - 40px);
     position: relative;
   }
 
