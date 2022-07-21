@@ -39,6 +39,7 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
       streetViewControl: false,
       clickableIcons: false,
       fullscreenControl: false,
+      gestureHandling: "greedy",
     }),
     []
   );
