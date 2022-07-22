@@ -71,18 +71,16 @@ const AuthorGrid = styled.div(
 `
 );
 
-const RecommendationCard = ({ recommendation, setRecommendations }) => {
-  const { id, user_id, nameOfPlace, city, website, comment, submittedBy } = recommendation;
+const RecommendationCard = ({ recommendations, recommendation, setRecommendations }) => {
+  const { _id, user_id, nameOfPlace, city, website, comment, submittedBy } = recommendation;
 
   const isUsersOwnRecommendation = user_id === localStorage.getItem("ID");
 
-  const formattedName = submittedBy.charAt(0).toUpperCase() + submittedBy.slice(1);
-
-  const confirmToDelete = () => {
+  const confirmToDelete = (id) => {
     const confirmBox = window.confirm("Are you sure you want to delete your recommendation?");
     if (confirmBox === true) {
       deleteRecommendation(id, (deleted) =>
-        setRecommendations(([deleted, ...recommendations]) => recommendations)
+        setRecommendations(recommendations.filter((rec) => rec._id !== deleted._id))
       );
     }
   };
@@ -101,9 +99,11 @@ const RecommendationCard = ({ recommendation, setRecommendations }) => {
       <p>{comment}</p>
       <AuthorGrid>
         <p>
-          Recommended by <span>{formattedName}</span>
+          Recommended by <span>{submittedBy}</span>
         </p>
-        {isUsersOwnRecommendation && <button onClick={confirmToDelete}>{trashIcon}</button>}
+        {isUsersOwnRecommendation && (
+          <button onClick={() => confirmToDelete(_id)}>{trashIcon}</button>
+        )}
       </AuthorGrid>
     </Article>
   );

@@ -60,6 +60,7 @@ const RecommendationsPage = () => {
             <RecommendationCard
               key={recommendation._id}
               recommendation={recommendation}
+              recommendations={recommendations}
               setRecommendations={setRecommendations}
             />
           );

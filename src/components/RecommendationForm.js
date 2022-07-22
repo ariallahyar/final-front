@@ -22,9 +22,10 @@ const RecommendationForm = ({ setRecommendations }) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    sendRecommendation(city, nameOfPlace, comment, website, (newRec) =>
-      setRecommendations((previousRecs) => [newRec, ...previousRecs])
-    );
+    sendRecommendation(city, nameOfPlace, comment, website, (newRec) => {
+      newRec.submittedBy = localStorage.getItem("Name");
+      setRecommendations((previousRecs) => [newRec, ...previousRecs]);
+    });
     resetForm();
     setDidSubmit(true);
   };
