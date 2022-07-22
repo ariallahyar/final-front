@@ -115,7 +115,7 @@ const SupperSocietyPage = () => {
       </Image>
       <h3>Why join Supper Society?</h3>
       <p>
-        Supper Society brings people together to share their love of food by arranging dining
+        Supper Society intends to bring people together to share their love of food by arranging dining
         opportunities in people's homes. Think of a community-based Sunday supper to look forward to
         each week. Who wouldn't want to be a part of that?
       </p>

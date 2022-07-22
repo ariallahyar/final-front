@@ -131,7 +131,7 @@ const Layout = ({ isMobile }) => {
       <main>
         <Outlet />
       </main>
-      <Footer>© Ari Allahyar | 2022</Footer>
+      <Footer>© Arianna Allahyar | 2022</Footer>
     </>
   );
 };
