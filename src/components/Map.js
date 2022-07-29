@@ -3,8 +3,6 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { base } from "../themes";
 import MarkerInfoWindow from "./InfoWindow";
 
-import { faMapMarker, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-
 const loadOptions = {
   id: "google-map-script",
   libraries: ["places"],
@@ -14,6 +12,7 @@ const loadOptions = {
 const mapContainerStyle = { width: "100%", height: "100%" };
 
 const markerColor = base.colors.secondary;
+const markerColorSelected = base.colors.primary;
 
 const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
   const { isLoaded, loadError } = useJsApiLoader(loadOptions);
@@ -53,30 +52,35 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
 
   if (!isLoaded) return <div>Loading...</div>;
 
-  const icon = {
-    path: faMapMarker.icon[4],
-    fillColor: markerColor,
-    fillOpacity: 1,
-    anchor: new window.google.maps.Point(
-      faMapMarker.icon[0] / 2, // width
-      faMapMarker.icon[1] // height
-    ),
-    strokeWeight: 1,
-    strokeColor: "#ffffff",
-    scale: 0.075,
+  const icon = (selected) => {
+    return {
+      path: window.google.maps.SymbolPath.CIRCLE,
+      fillColor: selected ? markerColorSelected : markerColor,
+      fillOpacity: 1,
+      strokeWeight: 1.5,
+      strokeColor: "#ffffff",
+      scale: 16,
+    };
   };
 
-  const iconSelected = {
-    path: faMapMarkerAlt.icon[4],
-    fillColor: markerColor,
-    fillOpacity: 1,
-    anchor: new window.google.maps.Point(
-      faMapMarkerAlt.icon[0] / 2, // width
-      faMapMarkerAlt.icon[1] // height
-    ),
-    strokeWeight: 1.5,
-    strokeColor: "#ffffff",
-    scale: 0.1,
+  const label = (tags) => {
+    const properties = {
+      fontFamily: "Fontawesome",
+      fontWeight: "900",
+      fontSize: "14px",
+      color: "white",
+      text: "\uf2e7",
+    };
+
+    if (tags.includes("Drinks")) {
+      properties.text = "\uf000";
+    }
+
+    if (tags.includes("Cafe") || tags.includes("Sweets")) {
+      properties.text = "\uf0f4";
+    }
+
+    return properties;
   };
 
   if (loadError) return <div>Sorry, map cannot be loaded at this time.</div>;
@@ -97,7 +101,9 @@ const Map = ({ markers, activeMarker, setActiveMarker, isMobile }) => {
           <Marker
             key={place_id}
             position={position}
-            icon={isSelected && !isMobile ? iconSelected : icon}
+            zIndex={isSelected ? window.google.maps.Marker.MAX_ZINDEX + 1 : undefined}
+            icon={icon(isSelected)}
+            label={label(place.tags)}
             onClick={() => handleActiveMarker(place_id)}
           >
             {isSelected &&
