@@ -1,1 +1,1 @@
-export const API_URL = "https://arieats.herokuapp.com";
+export const API_URL = "https://favoreats-api-xf3vwzg4eq-lz.a.run.app";
